@@ -1,3 +1,4 @@
+import { getByDisplayValue } from "@testing-library/react";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import {
   Col,
@@ -20,6 +21,7 @@ export default function Main() {
     const [data, setData] = useState([]);
     const [dataList, setDatalist] = useState([]);
     const [dataCurrent, setCurrent] = useState([]);
+    const [tomorrow, setTomorrow] = useState("");
 
     const getWeather = useCallback(async ( ) => {
         try {
@@ -57,6 +59,21 @@ export default function Main() {
         setCity(temporaryCity)
     }
     
+    useEffect(() => {
+        let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const tomorrow= days[new Date().getDay()] 
+        setTomorrow(tomorrow)
+  
+        const today=days[new Date().getDay()-1];
+      }, []);
+
+      const getDay=(i)=>{
+        let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const day= days[new Date().getDay()]
+        return day
+
+      }
+    
   return (
    <>
 
@@ -88,30 +105,51 @@ export default function Main() {
 
         <div className="shadow d-flex justify-content-center h-50 w-100">
           
-    <Row className="mb-10 align-self-center ">
-      
+     <Row className="mb-10 align-self-center">
+     
         <Col lg={12} className="text-white  text-center" >
+        <img src={`http://openweathermap.org/img/w/${dataCurrent.weather[0].icon}.png`} style={{width:"60px"}}/>
         <h3>{data.name},{data.country}</h3>
         <h1>{dataCurrent.main.temp} </h1>
-      
-        <h3 className="d-inline">{dataCurrent.weather[0].description}</h3>
-        <img src={`http://openweathermap.org/img/w/${dataCurrent.weather[0].icon}.png`} style={{width:"36px"}}/>
+       
+        <h3 className="">{dataCurrent.weather[0].description}</h3>
+       
         </Col>
+      
     </Row>
+
     
     </div>
-    <div className="shadow "style={{backgroundColor:"black",opacity: "0.5" ,height:"300px"}}>
+    <div className="shadow p-4 "style={{backgroundColor:"black",opacity: "0.7" ,height:"350px",width: "100%"}}>
     <h5 className="mb-10 text-white text-center ">Week</h5> 
-    <Row className="mb-10 text-white text-center ">
+    <Row className="text-white text-center  ">
+    
+   
+
+        
+      { dataList.map((data,index,i=0)=>
     
         
-      
-      <Col  xs={12} md={4} className="text-white   text-center" >
 
-           
-      <h5 className="d-inline mr-3">Date</h5>
-      <h5 className="d-inline ml-auto"> 50C</h5>
-      </Col>
+   
+      
+    index % 8 === 1 ? 
+    
+       
+      <Col  xs={12}  className="text-white m-2 d-flex  text-center" >
+
+     <h5 className="d-inline mr-auto   "> 
+     {getDay(i)}</h5>
+
+    <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} style={{width:"36px"}}/>
+    
+      <h5 className="d-inline ml-5 ">{data.main.temp}</h5>
+      
+      </Col> : <></>
+      
+     
+ 
+       )}
      </Row>
 
     </div>
