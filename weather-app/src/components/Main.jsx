@@ -11,7 +11,7 @@ import {
   Button,
   Form
 } from "react-bootstrap";
-import { AiOutlineSearch } from 'react-icons/ai';
+import { WiFahrenheit  } from 'react-icons/wi';
 
 
 
@@ -80,86 +80,83 @@ export default function Main() {
 
        
      
-        <Container
+<Container
        
-        className="shadow "
-         style={{    
-        height:"800px",
-        backgroundImage: `url("https://images.unsplash.com/photo-1486016006115-74a41448aea2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1647&q=80")`,
-        objectFit:"cover" 
-    }}>
+       className="shadow "
+        style={{    
+       height:"800px",
+       backgroundImage: `url("https://images.unsplash.com/photo-1559215334-45971d3b42b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1334&q=80")`,
+       objectFit:"cover" 
+   }}>
 
 <form  onSubmit={submitForm}>
-    <input 
-    className="shadow p-1 m-1"
-    style={{backgroundColor:"gray",opacity: "0.5",border:"none"}} 
-    placeholder="Search City" 
-    onChange={keyUp}
-    value={temporaryCity}
-   /> 
-   <Button type="submit" >
-       submit
+   <input 
+   className="shadow p-1 m-1"
+   style={{backgroundColor:"gray",opacity: "0.5",border:"none"}} 
+   placeholder="Search City" 
+   onChange={keyUp}
+   value={temporaryCity}
+  /> 
+  <Button type="submit" variant="warning" >
+      submit
 
-   </Button>
+  </Button>
 </form>
 
-        <div className="shadow d-flex justify-content-center h-50 w-100">
-          
-     <Row className="mb-10 align-self-center">
-     
-        <Col lg={12} className="text-white  text-center" >
-        <img src={`http://openweathermap.org/img/w/${dataCurrent.weather[0].icon}.png`} style={{width:"60px"}}/>
-        <h3>{data.name},{data.country}</h3>
-        <h1>{dataCurrent.main.temp} </h1>
-       
-        <h3 className="">{dataCurrent.weather[0].description}</h3>
-       
-        </Col>
+       <div className="d-flex justify-content-center h-50 w-100">
+         
+    <Row className="mb-10 align-self-center">
+{/*     
+       <Col lg={12} className="text-white  text-center" >
+       <img src={`http://openweathermap.org/img/w/${dataCurrent.weather[0].icon}.png`} style={{width:"60px"}}/>
+       <h3>{data.name},{data.country}</h3>
+       <h1>{dataCurrent.main.temp} <WiFahrenheit style={{fontSize:"60px"}}/></h1>
       
+       <h3 className="">{dataCurrent.weather[0].description}</h3>
+      
+       </Col> */}
+     
+   </Row>
+
+   
+   </div>
+   <div className="shadow p-4 "style={{backgroundColor:"black",opacity: "0.7" ,height:"370px",width: "100%"}}>
+   <h5 className="mb-10 text-white text-center ">Next 5 days of week</h5> 
+   <Row className="text-white text-center  ">
+   
+  
+
+       
+     { dataList.map((data,index)=>
+   
+       
+
+  
+     
+   index % 8 === 1 ? 
+   
+      
+     <Col  xs={12}  className="text-white m-2 d-flex  px-5 text-center" >
+
+    <h5 className="d-inline mr-auto   "> 
+    {getDay()}</h5>
+
+   <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} style={{width:"36px"}}/>
+   
+     <h5 className="d-inline ml-5 ">{data.main.temp}<WiFahrenheit style={{fontSize:"40px"}}/></h5>
+     
+     </Col> : <></>
+     
+    
+
+      )}
     </Row>
 
-    
-    </div>
-    <div className="shadow p-4 "style={{backgroundColor:"black",opacity: "0.7" ,height:"350px",width: "100%"}}>
-    <h5 className="mb-10 text-white text-center ">Week</h5> 
-    <Row className="text-white text-center  ">
-    
-   
+   </div>
 
-        
-      { dataList.map((data,index,i=0)=>
-    
-        
+  
 
-   
-      
-    index % 8 === 1 ? 
-    
-       
-      <Col  xs={12}  className="text-white m-2 d-flex  text-center" >
-
-     <h5 className="d-inline mr-auto   "> 
-     {getDay(i)}</h5>
-
-    <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} style={{width:"36px"}}/>
-    
-      <h5 className="d-inline ml-5 ">{data.main.temp}</h5>
-      
-      </Col> : <></>
-      
-     
- 
-       )}
-     </Row>
-
-    </div>
-
-
-
-   
-
-    </Container>
-   
+   </Container>
 
     </>
   );
