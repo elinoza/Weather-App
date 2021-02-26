@@ -4,9 +4,15 @@ import {
  Container,Card,Col,Row
 
 } from "react-bootstrap";
-function Favs() {
+function Favs(props) {
   const [favs, setFavs] = useState([]);
-  const [id, setId] = useState("60391a9363f38e3daf7cb703");
+  const [id, setId] = useState("");
+
+
+  useEffect(() => {
+  
+    setId(props.id)
+   }, [setId,props.id]);
   
   const getFavs = useCallback(async () => {
     try {
@@ -26,8 +32,11 @@ function Favs() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
-  useEffect(getFavs, [ getFavs]);
+  }, [id]);
+
+  useEffect(() => {
+    getFavs();
+  }, [id]);
   console.log(favs.length)
   return (
     <Container  className="shadow" >
@@ -37,6 +46,7 @@ function Favs() {
   favs.map((fav,index) => {
    
   <Col xs={12}>
+    
   <Card style={{ width: '18rem', margin:"5px" , backgroundImage:`url("https://images.unsplash.com/photo-1559215334-45971d3b42b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1334&q=80")`}}>
 
   <Card.Body>

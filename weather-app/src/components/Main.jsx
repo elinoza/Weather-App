@@ -54,9 +54,12 @@ function Main() {
   }, []);
  
   // useEffect=()=> {setToken(localStorage.getItem("accessToken")),[localStorage]}
+  
 
   return (
+    
     <div >
+      
  <Row>
       <Col xs={12} md={9}
       className="shadow "

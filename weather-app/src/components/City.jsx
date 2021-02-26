@@ -16,7 +16,8 @@ import {
 import { WiFahrenheit } from "react-icons/wi";
 
 
-export default function City() {
+export default function City(props) {
+
   const [city, setCity] = useState("london");
   const [temporaryCity, setTemp] = useState("london");
   const [data, setData] = useState([]);
@@ -25,7 +26,7 @@ export default function City() {
   const [favCity, setFavs] = useState(
    ""
   );
-  const [id, setId] = useState("60391092087988343e780d87");
+  const [id, setId] = useState("");
 
   const getWeather = useCallback(async () => {
     try {
@@ -50,7 +51,8 @@ export default function City() {
       console.log(error);
     }
   }, [city]);
-  useEffect(getWeather, [city, getWeather]);
+  console.log("props.id",props.id)
+ useEffect(getWeather, [city, getWeather]);
 
   const keyUp = (e) => {
     setTemp(e.currentTarget.value);
@@ -62,7 +64,10 @@ export default function City() {
   };
 
 
-  const postFavs = useCallback(async () => {
+ 
+  ///this function  is componentDidUpdate since it has no dependency array, it will be triggered within any changes on states
+ useEffect(() => {
+  (async function() {
     try {
       const url = process.env.REACT_APP_URL;
       // const id ="6038f14842ca86203e481354";
@@ -73,7 +78,7 @@ export default function City() {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({favsCity:favCity}),
+          body: JSON.stringify({favCity:favCity}),
            withCredentials: true // use cookies
         });
       if (response.ok) {
@@ -87,35 +92,15 @@ export default function City() {
     } catch (error) {
       console.log(error);
     }
-    
-  }, [favCity]);
-  
-  useEffect(async()=> {
-     try {
-    const url = process.env.REACT_APP_URL;
-    // const id ="6038f14842ca86203e481354";
-    let query = `/users/${id}/favs`;
-    let response = await fetch(url + query ,
-      {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({favsCity:favCity}),
-         withCredentials: true // use cookies
-      });
-    if (response.ok) {
-    
-      console.log("fav is posted", favCity);
       
+  })();
+},[favCity]);
+
+//ComponentDidMount
+useEffect(() => {
   
-    } else {
-      console.log(response,favCity);
-    }
-  } catch (error) {
-    console.log(error);
-  }
- });
+ setId(props.id)
+}, [setId,props.id]);
 
 
   const getDay = (i) => {
