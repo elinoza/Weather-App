@@ -25,7 +25,7 @@ export default function City() {
   const [favCity, setFavs] = useState(
    ""
   );
-  const [id, setId] = useState("6039155c1316433a4ff2ce2a");
+  const [id, setId] = useState("60391a9363f38e3daf7cb703");
 
   const getWeather = useCallback(async () => {
     try {
