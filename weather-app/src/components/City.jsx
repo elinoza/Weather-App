@@ -25,7 +25,7 @@ export default function City() {
   const [favCity, setFavs] = useState(
    ""
   );
-  const [id, setId] = useState("60391a9363f38e3daf7cb703");
+  const [id, setId] = useState("60391092087988343e780d87");
 
   const getWeather = useCallback(async () => {
     try {
@@ -89,12 +89,33 @@ export default function City() {
     }
     
   }, [favCity]);
-
-  useEffect(
-    postFavs, [favCity,postFavs]);
-
-
-
+  
+  useEffect(async()=> {
+     try {
+    const url = process.env.REACT_APP_URL;
+    // const id ="6038f14842ca86203e481354";
+    let query = `/users/${id}/favs`;
+    let response = await fetch(url + query ,
+      {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({favsCity:favCity}),
+         withCredentials: true // use cookies
+      });
+    if (response.ok) {
+    
+      console.log("fav is posted", favCity);
+      
+  
+    } else {
+      console.log(response,favCity);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+ });
 
 
   const getDay = (i) => {
@@ -115,7 +136,7 @@ export default function City() {
 
     return days[normalizedIndex];
   };
-
+  
   let i = 0;
   return (
     <>

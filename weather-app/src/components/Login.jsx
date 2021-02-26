@@ -33,7 +33,7 @@ const Login = () => {
       })
       console.log(res)
       localStorage.setItem("accessToken", res.data)
-       history.push("/Main")
+      window.location.replace("/Main")
       // if (res.ok){
       // // localStorage.setItem("accessToken", res.data)
       // //  history.push("/home")

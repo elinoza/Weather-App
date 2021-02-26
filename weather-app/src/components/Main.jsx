@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import  { useState, useEffect, useMemo, useCallback } from "react";
+
+
 
 
 import {
@@ -11,6 +15,46 @@ import City from "./City"
 import Favs from "./Favs"
 
 function Main() {
+
+  const [me, setMe] = useState([]);
+  const [accessToken, setToken] = useState("");
+
+
+  const getMe= useCallback(async () => {
+    try {
+      const url = process.env.REACT_APP_URL;
+      // const id ="6038f14842ca86203e481354";
+      let query = `/users/me`;
+      let response = await fetch(url + query ,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          }
+        });
+      if (response.ok) {
+       let me= await response.json()
+        console.log("me", me);
+        setMe(me)
+        
+    
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }, []);
+  
+  useEffect(() => {
+    getMe();
+  }, []);
+ 
+  // useEffect=()=> {setToken(localStorage.getItem("accessToken")),[localStorage]}
+
   return (
     <div >
  <Row>
@@ -22,11 +66,11 @@ function Main() {
         objectFit: "contain",
       }}
       >
-     <City/>
+     <City id={me._id}/>
      </Col>
      <Col xs={12} md={3}
      style={{backgroundColor:"#D8E2EA"}}>
-     <Favs/>
+     <Favs id={me._id}/>
     </Col>
     </Row>
  
