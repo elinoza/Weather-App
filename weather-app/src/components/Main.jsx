@@ -18,7 +18,8 @@ function Main() {
 
   const [me, setMe] = useState([]);
   const [accessToken, setToken] = useState("");
-
+  
+  
 
   const getMe= useCallback(async () => {
     try {
@@ -31,14 +32,14 @@ function Main() {
             "Content-Type": "application/json"
           },
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           }
         });
       if (response.ok) {
        let me= await response.json()
         console.log("me", me);
         setMe(me)
-        
+
     
       } else {
         console.log(response);
@@ -53,7 +54,6 @@ function Main() {
     getMe();
   }, []);
  
-  // useEffect=()=> {setToken(localStorage.getItem("accessToken")),[localStorage]}
   
 
   return (

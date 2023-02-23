@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Image, Button } from "react-bootstrap";
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import logo from "../logo/Spotify_Logo_Black.png";
@@ -17,6 +17,19 @@ const Login = () => {
   const [email, setEmail] = useState("test@test.com")
   const [password, setPassword] = useState("test12345")
   const history = useHistory()
+
+  const getTokens = async () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams.get("accessToken"));
+    if (!urlParams.has("accessToken")) {
+    } else {
+      const token = urlParams.get("accessToken");
+      console.log("token",token);
+      localStorage.setItem("token", token);
+    window.location.replace("/Main");
+    }
+  };
 
   const login = async (e)=> {
     // try {
@@ -45,8 +58,12 @@ const Login = () => {
     //   console.log(error)
     // }
       
-    }
-   
+    };
+    useEffect(() => {
+      getTokens()
+ 
+    }, []);
+    
   return (
 
     <Container
