@@ -22,8 +22,8 @@ function Favs(props) {
 
       let response = await fetch(url + query);
       if (response.ok) {
-        let favs = await response.json();
-        setFavs(favs);
+        let favs2 = await response.json();
+        setFavs(favs2);
         console.log("favs", favs);
         
       } else {
@@ -43,21 +43,24 @@ function Favs(props) {
       <h5> Your Favourite Cities</h5>
 <Row>
   {favs.length > 0 ?
+  
   favs.map((fav,index) => {
-   
-  <Col xs={12}>
-    
-  <Card style={{ width: '18rem', margin:"5px" , backgroundImage:`url("https://images.unsplash.com/photo-1559215334-45971d3b42b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1334&q=80")`}}>
 
-  <Card.Body>
-    <Card.Title>{fav._id}</Card.Title>
-    <Card.Text>
-    {fav.favCity}
-    </Card.Text>
+    <Col xs={12}>
     
-  </Card.Body>
-</Card>
-  </Col> 
+    <Card style={{ width: '18rem', margin:"5px" , backgroundImage:`url("")`}}>
+  
+    <Card.Body>
+      <Card.Title>{fav._id}</Card.Title>
+      <Card.Text>
+      {fav.favCity}
+      </Card.Text>
+      
+    </Card.Body>
+  </Card>
+    </Col> 
+
+  
 }) :
   <h3>Add cities to your Fav list to see them here!</h3>}
   
