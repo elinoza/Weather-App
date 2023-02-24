@@ -85,7 +85,7 @@ const Login = () => {
       <div className="signup-items mt-5">
         
       
-        <a href="http://localhost:3005/users/googleLogin"> <FcGoogle style={{ fontSize:"40px"}}/> <Button className="signup-btn google my-2">CONTINUE WITH GOOGLE</Button></a>
+        <a href={process.env.BACKEND_URL+"/users/googleLogin"} > <FcGoogle style={{ fontSize:"40px"}}/> <Button className="signup-btn google my-2">CONTINUE WITH GOOGLE</Button></a>
       </div>
       <h6>OR</h6>
       <div className="form-inputs">
