@@ -34,6 +34,7 @@ const Login = () => {
   const login = async (e)=> {
     // try {
       e.preventDefault()
+      console.log(email,password)
       const url=process.env.REACT_APP_URL
       const res = await axios(`${url}/users/login`, {
         method: 'POST',
@@ -118,7 +119,7 @@ const Login = () => {
           <div className="submit-btn">
             <input type="checkbox" id="checkbox" className="my-auto" />
             <p className="ml-n5 my-auto">Remember me</p>
-            <input className="form-input-submit" type="submit" value="LOG IN" />
+            <input   className="form-input-submit" type="submit" value="LOG IN" />
           </div>
         </form>
         <hr />
