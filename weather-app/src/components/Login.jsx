@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Image, Button } from "react-bootstrap";
+import { Container,Button } from "react-bootstrap";
 import {useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
@@ -16,6 +16,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("test@test.com")
   const [password, setPassword] = useState("test12345")
+  const [error, setError] = useState("jjj")
   const history = useHistory()
 
   const getTokens = async () => {
@@ -32,7 +33,7 @@ const Login = () => {
   };
 
   const login = async (e)=> {
-    // try {
+    try {
       e.preventDefault()
       console.log(email,password)
       const url=process.env.REACT_APP_URL
@@ -46,18 +47,20 @@ const Login = () => {
         }, withCredentials: true // use cookies
       })
       console.log(res)
-      localStorage.setItem("accessToken", res.data)
-      window.location.replace("/Main")
-      // if (res.ok){
-      // // localStorage.setItem("accessToken", res.data)
-      // //  history.push("/home")
-      // }
-      // else{console.log(res.error)}
+     // localStorage.setItem("token", res.data)
+       //window.location.replace("/Main")
+      if (res.statusText==="OK"){
+      localStorage.setItem("token", res.data)
+       history.push("/Main")
+      }
+      else{console.log(res)
+    }
     
       
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    } catch (error) {
+    
+      console.log(error)
+    }
       
     };
     useEffect(() => {
@@ -90,7 +93,8 @@ const Login = () => {
       </div>
       <h6>OR</h6>
       <div className="form-inputs">
-        <form className="form" onSubmit={login}>
+        <form className="form" onSubmit={login} >
+   
           <label>Email address or username</label>
           <input
             className="form-input"
@@ -100,7 +104,6 @@ const Login = () => {
             placeholder="Email adress or username"
             value={email} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setEmail(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
-
 
           />
           <br />
@@ -121,6 +124,7 @@ const Login = () => {
             <p className="ml-n5 my-auto">Remember me</p>
             <input   className="form-input-submit" type="submit" value="LOG IN" />
           </div>
+      
         </form>
         <hr />
         <h4 className="text-center mb-3">Don't have an account?</h4>
