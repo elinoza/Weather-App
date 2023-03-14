@@ -4,8 +4,8 @@ import { Container,Button } from "react-bootstrap";
 import {useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
-import logo from "../logo/Spotify_Logo_Black.png";
-import google from "../logo/google.png";
+
+import google from "../../logo/google.png";
 import { FcGoogle } from "react-icons/fc";
 
 
@@ -128,7 +128,7 @@ const Login = () => {
         </form>
         <hr />
         <h4 className="text-center mb-3">Don't have an account?</h4>
-        <button id="bottom-btn">SIGN UP </button>
+        <button onClick={() => (window.location = "/register") } id="bottom-btn">SIGN UP </button>
       </div>
     </Container>
     </Container>
