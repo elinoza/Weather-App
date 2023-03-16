@@ -28,6 +28,8 @@ export default function City(props) {
   );
   const [id, setId] = useState("");
 
+console.log("rendered")
+
   const getWeather = useCallback(async () => {
     try {
       const url = process.env.REACT_APP_URL;
@@ -52,7 +54,10 @@ export default function City(props) {
     }
   }, [city]);
   console.log("props.id",props.id)
- useEffect(getWeather, [city, getWeather]);
+  
+ /// I wonder why this function not working? the problem referential equality?? useEffect(()=>{getWeather()},[city,getWeather])
+  
+useEffect(getWeather, [city, getWeather]);
 
   const keyUp = (e) => {
     setTemp(e.currentTarget.value);
@@ -65,7 +70,7 @@ export default function City(props) {
 
 
  
-  ///this function  is componentDidUpdate since it has no dependency array, it will be triggered within any changes on states
+ 
  useEffect(() => {
   (async function() {
     try {
@@ -96,7 +101,7 @@ export default function City(props) {
   })();
 },[favCity]);
 
-//ComponentDidMount
+
 useEffect(() => {
   
  setId(props.id)
@@ -125,15 +130,7 @@ useEffect(() => {
   let i = 0;
   return (
     <>
-      <Container
-        fluid
-        className="shadow "
-        style={{
-          height: "800px",
-          backgroundImage: `url("https://images.unsplash.com/photo-1559215334-45971d3b42b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1334&q=80")`,
-          objectFit: "contain",
-        }}
-      >
+
         <Container
           style={{
             height: "700px",
@@ -234,7 +231,7 @@ useEffect(() => {
             </Row>
           </div>
         </Container>
-      </Container>
+     
     </>
   );
 }

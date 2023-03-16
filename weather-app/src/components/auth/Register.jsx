@@ -1,6 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container,Button } from "react-bootstrap";
+import {useState,useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
 
 const Register =()=>{
 
@@ -12,24 +14,45 @@ const Register =()=>{
     const [error, setError] = useState("jjj")
     const history = useHistory()
   
-
+const signUp=async (e)=>{
+e.preventDefault()
+try {
+    const url = process.env.REACT_APP_URL;
+ 
+    let query = `/users`;
+    let response = await fetch(url + query ,
+      {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({email,password,name,surname}),
+         withCredentials: true // use cookies
+      });
+    if (response.ok) {
+    
+      console.log("user is created", response);
+      history.push("/")
+      
+  
+    } else {
+      console.log(response);
+    }
+    
+} catch (error) {
+    console.log(error)
+}
+}
     return (
         <>
-          <Container
-        fluid
-        className="shadow "
-        style={{
-          height: "800px",
-          backgroundImage: `url("https://images.unsplash.com/photo-1472190649224-495422e1b602?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80")`,
-          objectFit: "contain",
-        }}>
+
     <Container 
      id="signup-page-wrapper"
      className="shadow d-flex  align-items-center"
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >
-      <h1 className="text-white">Add your favourite cities by signing up! </h1>
+      <h3 className="">Add your favourite cities by signing up! </h3>
       <div className="form-inputs">
         <form className="form" onSubmit={signUp} >
         <label>Name </label>
@@ -38,7 +61,7 @@ const Register =()=>{
             id="name" // WITH THIS ID IT CHECKS IF IT'S A VALID name
             name="name"
             type="name"
-            placeholder="name adress or username"
+            placeholder=""
             value={name} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setName(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
 
@@ -50,7 +73,7 @@ const Register =()=>{
             id="surname" // WITH THIS ID IT CHECKS IF IT'S A VALID surname
             name="surname"
             type="surname"
-            placeholder="surname adress or username"
+            placeholder=""
             value={surname} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setSurname(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
 
@@ -63,7 +86,7 @@ const Register =()=>{
             id="email" // WITH THIS ID IT CHECKS IF IT'S A VALID EMAIL
             name="email"
             type="email"
-            placeholder="Email adress or username"
+            placeholder="Email adress "
             value={email} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setEmail(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
 
@@ -80,12 +103,16 @@ const Register =()=>{
             onChange={e => setPassword(e.target.value)}
           />
           <br />
+  <input   className="form-input-submit align-self-center" type="submit" value="SIGN UP" />
          
       
         </form>
+        <hr />
+        <h4 className="text-center mb-3">Do you already have an account?</h4>
+        <button onClick={() => (window.location = "/") } id="bottom-btn">LOG IN </button>
         </div>
     </Container>
-    </Container>
+
         </>
     )
 }

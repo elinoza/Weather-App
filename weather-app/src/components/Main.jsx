@@ -7,7 +7,7 @@ import  { useState, useEffect, useMemo, useCallback } from "react";
 
 import {
   Col,
-  Row
+  Row,Container
 
 } from "react-bootstrap";
 
@@ -50,6 +50,7 @@ function Main() {
     
   }, []);
   
+  //componentDidMount -->
   useEffect(() => {
     getMe();
   }, []);
@@ -58,26 +59,24 @@ function Main() {
 
   return (
     
-    <div >
+    <Container  className="main-container">
       
  <Row>
       <Col xs={12} md={9}
-      className="shadow "
+      
       style={{
-        height: "800px",
-        backgroundImage: `url("https://images.unsplash.com/photo-1559215334-45971d3b42b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1334&q=80")`,
-        objectFit: "contain",
+       
       }}
       >
      <City id={me._id}/>
      </Col>
-     <Col xs={12} md={3}
-     style={{backgroundColor:"#D8E2EA"}}>
+     <Col  md={3} className="shadow d-none d-md-block side-bar"
+  >
      <Favs id={me._id}/>
     </Col>
     </Row>
  
-    </div>
+    </Container>
   );
 }
 

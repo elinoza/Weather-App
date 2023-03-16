@@ -70,21 +70,14 @@ const Login = () => {
     
   return (
 
-    <Container
-        fluid
-        className="shadow "
-        style={{
-          height: "800px",
-          backgroundImage: `url("https://images.unsplash.com/photo-1472190649224-495422e1b602?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80")`,
-          objectFit: "contain",
-        }}>
+
     <Container 
      id="signup-page-wrapper"
      className="shadow d-flex  align-items-center"
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >
-       <h1 className="text-white">WELCOME TO WEATHER APP </h1>
+       <h6 className="">WELCOME TO WEATHER APP </h6>
       
       <div className="signup-items mt-5">
         
@@ -131,7 +124,7 @@ const Login = () => {
         <button onClick={() => (window.location = "/register") } id="bottom-btn">SIGN UP </button>
       </div>
     </Container>
-    </Container>
+
     );
 };
 
