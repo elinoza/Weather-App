@@ -18,20 +18,18 @@ import { WiFahrenheit } from "react-icons/wi";
 
 export default function City(props) {
 
-  const [city, setCity] = useState("london");
-  const [temporaryCity, setTemp] = useState("london");
+
   const [data, setData] = useState([]);
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
-  const [favCity, setFavs] = useState(
-   ""
-  );
-  const [id, setId] = useState("");
 
-console.log("rendered")
+  const [city, setCity] = useState("");
+
+
 
   const getWeather = useCallback(async () => {
     try {
+      console.log("getweather function heyyo")
       const url = process.env.REACT_APP_URL;
       const key = process.env.REACT_APP_KEY;
 
@@ -55,57 +53,17 @@ console.log("rendered")
   }, [city]);
   console.log("props.id",props.id)
   
- /// I wonder why this function not working? the problem referential equality?? useEffect(()=>{getWeather()},[city,getWeather])
+
+ //useEffect(()=>{getWeather()},[getWeather]) this is also working properly, I wonder why we didnt choose this version
+
   
 useEffect(getWeather, [city, getWeather]);
-
-  const keyUp = (e) => {
-    setTemp(e.currentTarget.value);
-  };
-  const submitForm = (e) => {
-    e.preventDefault();
-
-    setCity(temporaryCity);
-  };
-
-
- 
- 
- useEffect(() => {
-  (async function() {
-    try {
-      const url = process.env.REACT_APP_URL;
-      // const id ="6038f14842ca86203e481354";
-      let query = `/users/${id}/favs`;
-      let response = await fetch(url + query ,
-        {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({favCity:favCity}),
-           withCredentials: true // use cookies
-        });
-      if (response.ok) {
-      
-        console.log("fav is posted", favCity);
-        
-    
-      } else {
-        console.log(response,favCity);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-      
-  })();
-},[favCity]);
 
 
 useEffect(() => {
   
- setId(props.id)
-}, [setId,props.id]);
+ setCity(props.city)
+}, [setCity,props.city]);
 
 
   const getDay = (i) => {
@@ -131,42 +89,8 @@ useEffect(() => {
   return (
     <>
 
-        <Container
-          style={{
-            height: "700px",
-          }}
-        >
-          <form onSubmit={submitForm}>
-            <input
-              className="shadow p-1 m-1"
-              style={{
-                backgroundColor: "white",
-                opacity: "0.5",
-                border: "none",
-              }}
-              placeholder="Search City"
-              onChange={keyUp}
-              value={temporaryCity}
-            />
-            <Button
-              type="submit"
-              className="shadow p-1 m-1"
-              style={{
-                color: "black",
-                backgroundColor: "white",
-                opacity: "0.5",
-                border: "none",
-              }}
-            >
-              submit
-            </Button>
-            <div className="d-inline">
-            
-            <GrFavorite  className="ml-4"style={{  fontSize:"30px"}} onClick={()=>setFavs(city)}/>
-            {/* <p className="text-muted">Add this city to your favourites</p> */}
-            </div>
-            
-          </form>
+     
+
 
           <div className="d-flex justify-content-center h-50 w-100">
             <Row className="mb-10 align-self-center">
@@ -230,7 +154,7 @@ useEffect(() => {
                 })}
             </Row>
           </div>
-        </Container>
+      
      
     </>
   );
