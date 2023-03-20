@@ -1,5 +1,14 @@
 
+.fav-city{  transition: 1s;
+  color:red;
 
+}
+.fav-city:hover{
+
+  transform:scale(1.2);
+
+
+}
 .main-container{
   border-radius: 3px;
     background: rgb(255, 236, 213);
