@@ -19,9 +19,9 @@ import Favs from "./Favs";
 
 function Main() {
   const [me, setMe] = useState([]);
-  const [city, setCity] = useState("london");
+  const [city, setCity] = useState("");
   const [temporaryCity, setTemp] = useState("");
-  const [favCity, setFavs] = useState(null);
+
   const [favCollection, setFavCollection] = useState(null);
   const [id, setId] = useState("");
   console.log("rendered");
@@ -60,8 +60,8 @@ function Main() {
 
   const deleteFav = async () => {
     try {
-     let cityFound= favCollection.find((elem)=> elem.favCity=== city)
-    console.log(cityFound._id)
+      let cityFound = favCollection.find((elem) => elem.favCity === city);
+      console.log(cityFound._id);
       const url = process.env.REACT_APP_URL;
       // const id ="6038f14842ca86203e481354";
       let query = `/users/${me._id}/favs/${cityFound._id}`;
@@ -69,55 +69,62 @@ function Main() {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         withCredentials: true, // use cookies
       });
       if (response.ok) {
-        console.log("the favcity:",favCity," deleted successfully");
+        console.log("the favcity:", " deleted successfully");
         getMe();
       } else {
-        console.log(response, favCity);
+        console.log(response);
       }
     } catch (error) {
       console.log(error);
     }
-  }
-  const postFav = useCallback(async () => {
-    try {
-      const url = process.env.REACT_APP_URL;
-      // const id ="6038f14842ca86203e481354";
-      let query = `/users/${me._id}/favs`;
-      let response = await fetch(url + query, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
+  };
 
-        },
-        body: JSON.stringify({ favCity: favCity }),
-        
-        withCredentials: true, // use cookies
-      });
-      if (response.ok) {
-        console.log("fav is posted", favCity);
-        getMe();
-      } else {
-        console.log(response, favCity);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [favCity]);
+
+  const postFav = async () => {
+if(city && city!=""){  try {
+  const url = process.env.REACT_APP_URL;
+  // const id ="6038f14842ca86203e481354";
+  let query = `/users/${me._id}/favs`;
+  let response = await fetch(url + query, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ favCity: city }),
+
+    withCredentials: true, // use cookies
+  });
+  if (response.ok) {
+    console.log("fav is posted", city);
+    getMe();
+  } else {
+    console.log(response, city);
+  }
+} catch (error) {
+  console.log(error);
+}}
+else{
+  console.log("choose a city to ad to favorites")
+}
+  
+  };
 
   // useEffect(postFav,[favCity,postFav])
 
-  useEffect(() => {
-    if (favCity) {
-      postFav();
-      console.log("fav city changed");
-    }
-  }, [favCity, postFav]);
+  //The below made bugs, so I removed. when I made changes on form element , It rendered and posted fav as if favcity is changed
+
+  // useEffect(() => {
+  //   if (favCity) {
+  //     postFav;
+  //     console.log("fav city changed");
+  //   }
+  // }, [favCity, postFav]);
 
   const keyUp = (e) => {
     setTemp(e.currentTarget.value);
@@ -130,7 +137,7 @@ function Main() {
 
   return (
     <Container className="main-container">
-      <form onSubmit={submitForm}>
+      <form className="mt-3" style={{position:"absolute",zIndex:"3"}} onSubmit={submitForm}>
         <input
           className="shadow p-1 m-1"
           style={{
@@ -155,7 +162,8 @@ function Main() {
           submit
         </Button>
         <div className="d-inline">
-          {favCollection && favCollection.find((elem) => elem.favCity === city) ? (
+          {favCollection &&
+          favCollection.find((elem) => elem.favCity === city) ? (
             <MdFavorite
               className=" ml-4"
               style={{ color: "red", fontSize: "30px" }}
@@ -165,7 +173,7 @@ function Main() {
             <MdFavoriteBorder
               className="fav-city ml-4"
               style={{ fontSize: "30px" }}
-              onClick={() => setFavs(city)}
+              onClick={()=>postFav()}
             />
           )}
 
@@ -173,12 +181,15 @@ function Main() {
         </div>
       </form>
 
-      <Row>
+      <Row className="main-row">
         <Col xs={12} md={9} style={{}}>
-          {/* <City city={city}/> */}
+           <City city={city}/> 
         </Col>
         <Col md={3} className="shadow d-none d-md-block side-bar ">
-          {/* <Favs city={city}/> */}
+   
+            <h5 className="mt-2"> Your Favourite Cities</h5>
+            <Row>{favCollection&&favCollection.map((fav)=><Favs key={fav._id} city={fav} />)}</Row>
+   
         </Col>
       </Row>
     </Container>
@@ -186,3 +197,5 @@ function Main() {
 }
 
 export default Main;
+
+
