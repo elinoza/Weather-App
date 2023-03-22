@@ -14,17 +14,19 @@ import {
 } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-import City from "./City";
+import CityApp from "./City";
 import Favs from "./Favs";
+
+
+
 
 function Main() {
   const [me, setMe] = useState([]);
   const [city, setCity] = useState("");
   const [temporaryCity, setTemp] = useState("");
-
+  const [focus,setFocus] = useState(false);
   const [favCollection, setFavCollection] = useState(null);
   const [id, setId] = useState("");
-  console.log("rendered");
 
   /// get Me  and setMe
   const getMe = useCallback(async () => {
@@ -128,39 +130,28 @@ else{
 
   const keyUp = (e) => {
     setTemp(e.currentTarget.value);
-  };
-  const submitForm = (e) => {
-    e.preventDefault();
-    let insensitiveCity = temporaryCity.toUpperCase();
-    setCity(insensitiveCity);
+
   };
 
+const submitForm = (e) => {
+  e.preventDefault();
+  let insensitiveCity = temporaryCity.toUpperCase();
+  setCity(insensitiveCity);
+};
+
+
   return (
-    <Container className="main-container">
-      <form className="mt-3" style={{position:"absolute",zIndex:"3"}} onSubmit={submitForm}>
+    <Container className= {focus? "main-container non-focus text-white":"main-container text-white"}>
+      <form className="mt-3 text-white" style={{position:"absolute",zIndex:"3"}} onSubmit={submitForm}>
         <input
-          className="shadow p-1 m-1"
-          style={{
-            backgroundColor: "white",
-            opacity: "0.5",
-            border: "none",
-          }}
+          className="search-input p-1 m-1"
+      onClick={()=> setFocus(true)}
           placeholder="Search City"
           onChange={keyUp}
           value={temporaryCity}
+     
         />
-        <Button
-          type="submit"
-          className="shadow p-1 m-1"
-          style={{
-            color: "black",
-            backgroundColor: "white",
-            opacity: "0.5",
-            border: "none",
-          }}
-        >
-          submit
-        </Button>
+ 
         <div className="d-inline">
           {favCollection &&
           favCollection.find((elem) => elem.favCity === city) ? (
@@ -183,12 +174,12 @@ else{
 
       <Row className="main-row">
         <Col xs={12} md={9} style={{}}>
-           <City city={city}/> 
+         {city ? <CityApp key={city._id} city={city}/> :"" }
         </Col>
         <Col md={3} className="shadow d-none d-md-block side-bar ">
    
-            <h5 className="mt-2"> Your Favourite Cities</h5>
-            <Row>{favCollection&&favCollection.map((fav)=><Favs key={fav._id} city={fav} />)}</Row>
+    
+            <Row>{favCollection&&favCollection.map((fav)=><Favs city={fav} />)}</Row>
    
         </Col>
       </Row>

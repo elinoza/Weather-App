@@ -8,21 +8,56 @@
   transform:scale(1.2);
 
 
+  
 }
+
+.search-input{
+  border:none;
+  background: rgba(0,0,0,0.0);
+  border-bottom: 1px solid #aea2a2;
+  transition:0.5s linear;
+  color:white;
+  
+
+}
+.search-input:focus{
+outline:none;
+
+box-shadow: 0px 5px 10px 0px rgb(255 255 255 / 80%);
+
+}
+
 .main-container{
-  border-radius: 3px;
-    background: rgb(255, 236, 213);
+  border-radius: 25px;
+
     box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
     margin-top:50px;
-    height:800px
-}
+    height:800px;
+    background-image:url("https://images.unsplash.com/photo-1496450681664-3df85efbd29f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
 .side-bar{
-  border-left: 1px solid white;
+  border-left: 1px solid #aea2a2;
  border-radius: 25px;
 }
 .main-row{
   height:100%
 }
+.days-report{
+  border-top:1px solid #aea2a2
+}
+.city-card{
+
+  height:80px;
+  border:none
+
+}
+.card-img-class
+  {object-fit: cover;
+  height:  100%}
+
 
 .form {
   display: flex;

@@ -1,20 +1,13 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import {
- Container,Card,Col,Row
-
-} from "react-bootstrap";
+import { Container, Card, Col, Row } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 function Favs(props) {
   const [city, setCity] = useState({});
 
-
-
   useEffect(() => {
-  
-    setCity(props.city)
-   }, [setCity,props.city]);
-  
+    setCity(props.city);
+  }, [setCity, props.city]);
+
   // const getFavs = useCallback(async () => {
   //   try {
   //     const url = process.env.REACT_APP_URL;
@@ -26,7 +19,7 @@ function Favs(props) {
   //       let favs2 = await response.json();
   //       setFavs(favs2);
   //       console.log("favs", favs);
-        
+
   //     } else {
   //       console.log(response);
   //     }
@@ -39,36 +32,27 @@ function Favs(props) {
   //   getFavs();
   // }, [id]);
 
-
   return (
-   
+    <Col xs={12} style={{ padding: "0px" }}>
+      <Card className=" city-card text-white">
+        <Card.Img
+          src="https://images.unsplash.com/photo-1558486012-817176f84c6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=970&q=80"
+        
+          alt="Card image"
+          className="card-img-class"
+        />
+        <Card.ImgOverlay>
+          <Card.Title>
+            <h6 className="d-inline mr-auto">{city.favCity}</h6>
 
-  
-
-
-    <Col xs={12}>
-    
-    <Card style={{ }}>
-  
-    <Card.Body>
-      <Card.Title> {city.favCity}  <MdFavorite
-              className=" ml-4"
+            <MdFavorite
+              className="  "
               style={{ color: "red", fontSize: "20px" }}
-             
-            /></Card.Title>
-    
-      
-      <Card.Text>
-     
-      </Card.Text>
-      
-    </Card.Body>
-  </Card>
-    </Col> 
-
-  
-  
-
+            />
+          </Card.Title>
+        </Card.ImgOverlay>
+      </Card>
+    </Col>
   );
 }
 
