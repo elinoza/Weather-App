@@ -13,14 +13,20 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import { WiDegrees } from "react-icons/wi";
+
 
 export default function City(props) {
   const [data, setData] = useState([]);
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
 
+
   const [city, setCity] = useState("");
+  const triggerError=(mode)=>{
+ 
+    props.triggerError(mode)
+
+  }
 
   const getWeather = useCallback(async () => {
     try {
@@ -32,6 +38,7 @@ export default function City(props) {
 
       let response = await fetch(url + query);
       if (response.ok) {
+        triggerError(false);
         let weather = await response.json();
         setData(weather.city);
         setDatalist(weather.list);
@@ -40,10 +47,12 @@ export default function City(props) {
         console.log("weather", weather);
         console.log("dataCurrent", data);
       } else {
-        console.log(response);
+        console.log(response)
+      ;
       }
     } catch (error) {
-      console.log(error);
+      console.log("hey",error);
+      triggerError(true)
     }
   }, [city]);
 
@@ -83,9 +92,8 @@ export default function City(props) {
   return (
   
     <>
-      {data ? console.log("yes",data):"no"}
-      {/* <div className="d-flex justify-content-center h-50 w-100">
-        <Row className="mb-10 align-self-center">
+      {data ? <><div className="d-flex justify-content-center h-50 w-100">
+        <Row className="mt-5 align-self-center">
           {dataCurrent.weather && (
             <Col lg={12} className="text-white  text-center">
               <img
@@ -107,12 +115,12 @@ export default function City(props) {
         </Row>
       </div>
       <div
-        className=" days-report p-4 "
+        className=" mt-5 days-report p-4 "
      
       >
       
-        <Row className="text-white text-center  ">
-          {dataList.length > 0 &&
+        <Row className="mt-4 text-white text-center  ">
+          {dataList && dataList.length > 0 &&
             dataList.map((data, index) => {
               i = index % 8 === 1 ? i + 1 : i;
 
@@ -139,7 +147,8 @@ export default function City(props) {
               );
             })}
         </Row>
-      </div> */}
+      </div> </>:""}
+     
     </>
   );
 }

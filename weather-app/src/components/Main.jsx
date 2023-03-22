@@ -12,7 +12,7 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder,MdSearch } from "react-icons/md";
 
 import CityApp from "./City";
 import Favs from "./Favs";
@@ -24,9 +24,9 @@ function Main() {
   const [me, setMe] = useState([]);
   const [city, setCity] = useState("");
   const [temporaryCity, setTemp] = useState("");
-  const [focus,setFocus] = useState(false);
+
   const [favCollection, setFavCollection] = useState(null);
-  const [id, setId] = useState("");
+  const [error, setError] = useState(false);
 
   /// get Me  and setMe
   const getMe = useCallback(async () => {
@@ -133,25 +133,37 @@ else{
 
   };
 
+
 const submitForm = (e) => {
   e.preventDefault();
   let insensitiveCity = temporaryCity.toUpperCase();
   setCity(insensitiveCity);
 };
+const  triggerError=(error)=>{
+setError(error)
 
+  }
+  const favSelect=(e)=>{
+    e.preventDefault()
+console.log("hey")
+  }
 
   return (
-    <Container className= {focus? "main-container non-focus text-white":"main-container text-white"}>
+    <Container className= "main-container text-white">
       <form className="mt-3 text-white" style={{position:"absolute",zIndex:"3"}} onSubmit={submitForm}>
+      {error && temporaryCity!= "" ?  <div className="error-city">Please enter a valid city</div>:""}
+        <div style={{position:"relative"}} className="d-inline">  
         <input
           className="search-input p-1 m-1"
-      onClick={()=> setFocus(true)}
+
           placeholder="Search City"
           onChange={keyUp}
           value={temporaryCity}
-     
+       
         />
- 
+        <MdSearch className="search-icon"/>
+ </div>
+      
         <div className="d-inline">
           {favCollection &&
           favCollection.find((elem) => elem.favCity === city) ? (
@@ -174,12 +186,12 @@ const submitForm = (e) => {
 
       <Row className="main-row">
         <Col xs={12} md={9} style={{}}>
-         {city ? <CityApp key={city._id} city={city}/> :"" }
+         {city ? <CityApp triggerError={triggerError} key={city._id} city={city}/> : "" }
         </Col>
         <Col md={3} className="shadow d-none d-md-block side-bar ">
    
     
-            <Row>{favCollection&&favCollection.map((fav)=><Favs city={fav} />)}</Row>
+            <Row>{favCollection&&favCollection.map((fav)=><Favs onClick={()=>console.log("hey babe")} city={fav} />)}</Row>
    
         </Col>
       </Row>
