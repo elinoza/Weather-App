@@ -75,7 +75,7 @@ export default function City(props) {
       "Friday",
       "Saturday",
     ];
-    console.log(new Date().getDay(), i, new Date().getDay() + i);
+    //console.log(new Date().getDay(), i, new Date().getDay() + i);
     const howManyDaysFromToday = i;
     const anormalizedIndex = new Date().getDay() + i;
     const normalizedIndex =
@@ -93,6 +93,7 @@ export default function City(props) {
   
     <>
       {data ? <><div className="d-flex justify-content-center h-50 w-100">
+        
         <Row className="mt-5 align-self-center">
           {dataCurrent.weather && (
             <Col lg={12} className="text-white  text-center">

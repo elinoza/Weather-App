@@ -1,8 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+font-weight: 600;
+
+}
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #cec4c4;
   opacity: 1; /* Firefox */
 }
 
+.search-fav-form{
+  position:absolute;
+  z-index:10;
+  width: 100%;
+  left:0px;right:0px;
+  top:0px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  display:flex;
+  align-items:center;
+justify-content:space-between
+
+}
 .error-city{
   width:100px;
   background-color:#f3eeee;
@@ -20,13 +41,18 @@
 
 }
 
-.fav-city{  transition: 1s;
-  color:red;
-
+.hearts {
+  color:#f3eeee;
+  font-size:30px;
+ padding-top:20px;
 }
-.fav-city:hover{
 
-  transform:scale(1.2);
+.hearts .heart{ transition: 1s;}
+.hearts .heart.fav-heart{ color:rgb(211, 98, 117)}
+.hearts .heart:hover{
+
+  transform:scale(1.5);
+  color:rgb(211, 98, 117)
 
 
   
@@ -71,6 +97,53 @@ transform:scale(1.1)
   border-left: 1px solid #aea2a2;
  border-radius: 25px;
 }
+.sidebar-heart{ 
+  background-color:red;
+  font-weight: 100;
+  padding:10px;
+  font-weight:100;
+  font-size: 0.8rem;
+  
+cursor:pointer;
+  height:100%;
+  position:absolute;
+  z-index:1;
+  right: 0px;
+  width:60px;
+  display:flex;
+  align-items:center;
+
+opacity:0;
+transition: 1s
+
+
+
+}
+
+.fav-side-bar{
+  cursor:pointer;
+
+}
+
+.card-city{
+  transition:0.5s linear;
+  transform-origin: center;
+}
+.fav-side-bar:hover  .card-city{
+transform:scale(1.1);
+
+
+}
+.fav-side-bar:hover  .sidebar-heart{
+  animation:deleteFav 1s  forwards
+
+}
+
+@keyframes deleteFav {
+  0%{opacity:0;width:0px}
+ 100%{opacity:1;width:60px}
+}
+
 .main-row{
   height:100%
 }

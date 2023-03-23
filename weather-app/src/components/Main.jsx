@@ -60,9 +60,9 @@ function Main() {
     getMe();
   }, []);
 
-  const deleteFav = async () => {
+  const deleteFav = async (selectedCity) => {
     try {
-      let cityFound = favCollection.find((elem) => elem.favCity === city);
+      let cityFound = favCollection.find((elem) => elem.favCity === selectedCity);
       console.log(cityFound._id);
       const url = process.env.REACT_APP_URL;
       // const id ="6038f14842ca86203e481354";
@@ -130,6 +130,7 @@ else{
 
   const keyUp = (e) => {
     setTemp(e.currentTarget.value);
+    
 
   };
 
@@ -143,14 +144,16 @@ const  triggerError=(error)=>{
 setError(error)
 
   }
-  const favSelect=(e)=>{
-    e.preventDefault()
-console.log("hey")
-  }
+  const handleClick = (selectedCity) => { setCity(selectedCity) }
+  console.log("temp",temporaryCity,"city",city)
 
   return (
     <Container className= "main-container text-white">
-      <form className="mt-3 text-white" style={{position:"absolute",zIndex:"3"}} onSubmit={submitForm}>
+ 
+
+      <Row className="main-row">
+        <Col xs={12} md={9} >
+          <div className="search-fav-form"> <form className="d-inline mt-3 text-white"  onSubmit={submitForm}>
       {error && temporaryCity!= "" ?  <div className="error-city">Please enter a valid city</div>:""}
         <div style={{position:"relative"}} className="d-inline">  
         <input
@@ -163,35 +166,34 @@ console.log("hey")
         />
         <MdSearch className="search-icon"/>
  </div>
-      
-        <div className="d-inline">
+   
+      </form>
+         {city && !error &&
+        <div className="d-inline  ml-auto hearts">
           {favCollection &&
           favCollection.find((elem) => elem.favCity === city) ? (
             <MdFavorite
-              className=" ml-4"
-              style={{ color: "red", fontSize: "30px" }}
-              onClick={() => deleteFav()}
+              className=" heart fav-heart ml-4"
+            
+              onClick={() => deleteFav(city)}
             />
           ) : (
             <MdFavoriteBorder
-              className="fav-city ml-4"
-              style={{ fontSize: "30px" }}
+              className="heart ml-4"
+             
               onClick={()=>postFav()}
             />
           )}
 
-          {/* <p className="text-muted">Add this city to your favourites</p> */}
         </div>
-      </form>
-
-      <Row className="main-row">
-        <Col xs={12} md={9} style={{}}>
+        }</div>
+       
          {city ? <CityApp triggerError={triggerError} key={city._id} city={city}/> : "" }
         </Col>
         <Col md={3} className="shadow d-none d-md-block side-bar ">
    
     
-            <Row>{favCollection&&favCollection.map((fav)=><Favs onClick={()=>console.log("hey babe")} city={fav} />)}</Row>
+            <Row>{favCollection&&favCollection.map((fav)=><Favs onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row>
    
         </Col>
       </Row>

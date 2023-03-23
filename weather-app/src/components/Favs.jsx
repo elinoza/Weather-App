@@ -8,6 +8,7 @@ function Favs(props) {
     setCity(props.city);
   }, [setCity, props.city]);
 
+
   // const getFavs = useCallback(async () => {
   //   try {
   //     const url = process.env.REACT_APP_URL;
@@ -33,7 +34,9 @@ function Favs(props) {
   // }, [id]);
 
   return (
-    <Col xs={12} style={{ padding: "0px" }}>
+    <Col className="fav-side-bar" onClick={()=> props.onClick(city.favCity)} xs={12} style={{ padding: "0px" }}>
+      <div    onClick={()=>props.deleteFavCity(city.favCity)}
+              className="sidebar-heart "><h12>Delete</h12></div>
       <Card className=" city-card text-white">
         <Card.Img
           src="https://images.unsplash.com/photo-1558486012-817176f84c6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=970&q=80"
@@ -41,14 +44,14 @@ function Favs(props) {
           alt="Card image"
           className="card-img-class"
         />
-        <Card.ImgOverlay>
-          <Card.Title>
-            <h6 className="d-inline mr-auto">{city.favCity}</h6>
+        <Card.ImgOverlay className="card-city ">
+          <Card.Title >
+            <h6 className="  d-inline mr-auto">{city.favCity}</h6>
 
-            <MdFavorite
-              className="  "
-              style={{ color: "red", fontSize: "20px" }}
-            />
+            
+        
+            
+            
           </Card.Title>
         </Card.ImgOverlay>
       </Card>
