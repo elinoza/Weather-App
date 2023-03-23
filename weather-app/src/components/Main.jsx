@@ -13,6 +13,8 @@ import {
   Form,
 } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder,MdSearch } from "react-icons/md";
+import {GiHamburgerMenu} from "react-icons/gi";
+
 
 import CityApp from "./City";
 import Favs from "./Favs";
@@ -22,11 +24,11 @@ import Favs from "./Favs";
 
 function Main() {
   const [me, setMe] = useState([]);
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("TOKAT");
   const [temporaryCity, setTemp] = useState("");
-
   const [favCollection, setFavCollection] = useState(null);
   const [error, setError] = useState(false);
+  const[sideBarOpen,setSideBar]=useState(false);
 
   /// get Me  and setMe
   const getMe = useCallback(async () => {
@@ -133,7 +135,7 @@ else{
     
 
   };
-
+const toggleSideBar=()=>{setSideBar(!sideBarOpen)}
 
 const submitForm = (e) => {
   e.preventDefault();
@@ -145,13 +147,15 @@ setError(error)
 
   }
   const handleClick = (selectedCity) => { setCity(selectedCity) }
-  console.log("temp",temporaryCity,"city",city)
+const handleMainClick=()=>{
+  if(sideBarOpen){ setSideBar(!sideBarOpen)}
+}
 
   return (
-    <Container className= "main-container text-white">
- 
+    <Container onClick={ handleMainClick} className= "main-container text-white">
 
-      <Row className="main-row">
+
+      <Row  className="main-row">
         <Col xs={12} md={9} >
           <div className="search-fav-form"> <form className="d-inline mt-3 text-white"  onSubmit={submitForm}>
       {error && temporaryCity!= "" ?  <div className="error-city">Please enter a valid city</div>:""}
@@ -168,6 +172,7 @@ setError(error)
  </div>
    
       </form>
+      <div className="d-inline mt-3">   <GiHamburgerMenu  onClick={toggleSideBar} id="hamburger-menu"/>
          {city && !error &&
         <div className="d-inline  ml-auto hearts">
           {favCollection &&
@@ -187,16 +192,25 @@ setError(error)
 
         </div>
         }</div>
+     
+        </div>
        
          {city ? <CityApp triggerError={triggerError} key={city._id} city={city}/> : "" }
+    
         </Col>
+        
         <Col md={3} className="shadow d-none d-md-block side-bar ">
+   
+      
    
     
             <Row>{favCollection&&favCollection.map((fav)=><Favs onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row>
    
         </Col>
+      
       </Row>
+
+      {sideBarOpen? <div className="special-sideBar-wrapper"><Row className="special-sideBar">{favCollection&&favCollection.map((fav)=><Favs onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row></div>:""} 
     </Container>
   );
 }
