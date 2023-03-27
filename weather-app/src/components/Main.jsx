@@ -150,7 +150,7 @@ setError(error)
 const handleMainClick=()=>{
   if(sideBarOpen){ setSideBar(!sideBarOpen)}
 }
-
+console.log(favCollection)
   return (
     <Container onClick={ handleMainClick} className= "main-container text-white">
 
@@ -195,7 +195,7 @@ const handleMainClick=()=>{
      
         </div>
        
-         {city ? <CityApp triggerError={triggerError} key={city._id} city={city}/> : "" }
+         {city ? <CityApp triggerError={triggerError} city={city}/> : "" }
     
         </Col>
         
@@ -204,13 +204,13 @@ const handleMainClick=()=>{
       
    
     
-            <Row>{favCollection&&favCollection.map((fav)=><Favs onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row>
+            <Row>{favCollection&&favCollection.map((fav)=><Favs key={fav._id} onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row>
    
         </Col>
       
       </Row>
 
-      {sideBarOpen? <div className="special-sideBar-wrapper"><Row className="special-sideBar">{favCollection&&favCollection.map((fav)=><Favs onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row></div>:""} 
+      {sideBarOpen? <div className="special-sideBar-wrapper"><Row className="special-sideBar">{favCollection&&favCollection.map((fav)=><Favs key={fav._id} onClick={handleClick} deleteFavCity={deleteFav} city={fav} />)}</Row></div>:""} 
     </Container>
   );
 }

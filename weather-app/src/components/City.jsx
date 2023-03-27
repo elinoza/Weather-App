@@ -33,6 +33,7 @@ export default function City(props) {
       console.log("getweather function heyyo");
       const url = process.env.REACT_APP_URL;
       const key = process.env.REACT_APP_KEY;
+      let units="metric"
 
       let query = `/api/${city}`;
 
@@ -86,9 +87,10 @@ export default function City(props) {
 
   const fahToCelcius = (fah) => {
  
-    return ( (fah - 32) / 1.8).toFixed(0)
+    return (fah-273,15)
   };
   let i = 0;
+
   return (
   
     <>
@@ -105,7 +107,7 @@ export default function City(props) {
                 {data.name},{data.country}
               </h3>
               <h1>
-                {dataCurrent.main.temp}{" "}
+                {fahToCelcius(dataCurrent.main.temp)}{" "}
                { '\u00B0'}C
               </h1> 
 
@@ -127,10 +129,11 @@ export default function City(props) {
 
               return index % 8 === 1 ? (
                 <Col
+                key={data.dt}
                   xs={12}
                   className="text-white m-2 d-flex  px-5 text-center"
                 >
-                  <h5 className="d-inline mr-auto   ">{getDay(i)}</h5>
+                  <h5 className="d-inline mr-auto   ">{ getDay(i)}</h5>
 
                   <img
                     src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
@@ -138,13 +141,13 @@ export default function City(props) {
                   />
 
                   <h5 className="d-inline ml-5 ">
-                    {fahToCelcius(data.main.temp)}
+                    {data.main.temp}
                     { '\u00B0'}C
                   
                   </h5>
                 </Col>
               ) : (
-                <></>
+              ""
               );
             })}
         </Row>

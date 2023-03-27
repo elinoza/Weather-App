@@ -36,7 +36,7 @@ function Favs(props) {
   return (
     <Col className="fav-side-bar" onClick={()=> props.onClick(city.favCity)} xs={12} style={{ padding: "0px" }}>
       <div    onClick={()=>props.deleteFavCity(city.favCity)}
-              className="sidebar-heart "><h12>Delete</h12></div>
+              className="sidebar-heart "><h6>Delete</h6></div>
       <Card className=" city-card text-white">
         <Card.Img
           src="https://images.unsplash.com/photo-1558486012-817176f84c6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=970&q=80"
