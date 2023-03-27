@@ -23,6 +23,7 @@ font-weight: 600;
   background-color:#f3eeee;
   color:black;
   font-size: 12px;
+  font-weight: 100;
   /* padding:10px; */
   position:absolute;
   z-index:1;
@@ -31,6 +32,15 @@ font-weight: 600;
   left: 0px;
   transition:0.5s ;
   box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+  
+}
+#dropDown-menu p{
+  padding:5px;
+  cursor:pointer;
+
+}
+#dropDown-menu p:hover{
+ background-color:rgb(210, 208, 208)
   
 }
 @media only screen and (max-width:768px) {

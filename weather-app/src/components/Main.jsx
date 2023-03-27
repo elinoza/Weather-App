@@ -13,7 +13,7 @@ import {
   Form,
 } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder, MdSearch } from "react-icons/md";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiCondorEmblem, GiHamburgerMenu } from "react-icons/gi";
 
 import CityApp from "./City";
 import Favs from "./Favs";
@@ -26,6 +26,7 @@ function Main() {
   const [favCollection, setFavCollection] = useState(null);
   const [error, setError] = useState(false);
   const [sideBarOpen, setSideBar] = useState(false);
+  const [possibleCities, setPossibleCities] = useState([]);
 
 //change city to geoLocation
 const convertToGeoLoc=async(selectedCity)=>{
@@ -39,6 +40,7 @@ const convertToGeoLoc=async(selectedCity)=>{
     if (response.ok){
       let cities= await response.json()
       console.log(cities)
+      setPossibleCities(cities)
     }
     else{
       console.log(response)
@@ -199,7 +201,7 @@ getCurrentLocation()
       setSideBar(!sideBarOpen);
     }
   };
-
+console.log(possibleCities)
   return (
     <Container onClick={handleMainClick} className="main-container text-white">
       <Row className="main-row">
@@ -212,7 +214,7 @@ getCurrentLocation()
               ) : (
                 ""
               )}
-               <div id="dropDown-menu">TOKAT</div>
+              {possibleCities && possibleCities.length >0 && <div id="dropDown-menu">{possibleCities.map((city)=><p onClick={()=>setGeoCoo(`lat=${city.lat}&lon=${city.lon}`)} className="mb-0 " >{city.name}, {city.state}, {city.country} </p>)}</div>}
               <div style={{ position: "relative" }} className="d-inline">
                 <input
                   className="search-input p-1 m-1"
