@@ -19,15 +19,14 @@ export default function City(props) {
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
 
-
   // const [geoCoo, setGeoCoo] = useState("");
   const triggerError = (mode) => {
     props.triggerError(mode);
   };
-  const passCityNameToParent=(cityName)=>{
-props.passCityNameToParent(cityName)
-console.log(cityName)
-   }
+  const passCityNameToParent = (cityName) => {
+    props.passCityNameToParent(cityName);
+    console.log(cityName);
+  };
 
   const getWeather = useCallback(async () => {
     try {
@@ -44,7 +43,7 @@ console.log(cityName)
         setData(weather.city);
         setDatalist(weather.list);
         setCurrent(weather.list[0]);
-        passCityNameToParent(weather.city.name)
+        passCityNameToParent(weather.city.name);
 
         console.log("weather", weather);
         console.log("dataCurrent", data);
@@ -55,10 +54,6 @@ console.log(cityName)
       console.log("error", error);
       triggerError(true);
     }
-
-
-   
-  
   }, [props.geoCoo]);
 
   //useEffect(()=>{getWeather()},[getWeather]) this is also working properly, I wonder why we didnt choose this version
@@ -88,8 +83,8 @@ console.log(cityName)
     return days[normalizedIndex];
   };
 
-  const kelToCelcius = (kel) => {
-    return (kel - 273.15).toFixed(0);
+  const celToFah = (cel) => {
+    return ((cel * 9) / 5 + 32).toFixed(0);
   };
   let i = 0;
 
@@ -109,7 +104,10 @@ console.log(cityName)
                     {data.name},{data.country}
                   </h3>
                   <h1>
-                    {kelToCelcius(dataCurrent.main.temp)} {"\u00B0"}C
+                    {props.degrees === "celsius"
+                      ? (dataCurrent.main.temp).toFixed(0)+ "\u00B0" + "C"
+                      : celToFah(dataCurrent.main.temp) + "\u00B0" + "F"
+                    }
                   </h1>
 
                   <h3 className="">{dataCurrent.weather[0].description}</h3>
@@ -139,8 +137,10 @@ console.log(cityName)
                       />
 
                       <h5 className="d-inline ml-5 ">
-                        {kelToCelcius(data.main.temp)}
-                        {"\u00B0"}C
+                      {props.degrees === "celsius"
+                      ? (data.main.temp).toFixed(0)+ "\u00B0" + "C"
+                      : celToFah(data.main.temp) + "\u00B0" + "F"
+                    }
                       </h5>
                     </Col>
                   ) : (

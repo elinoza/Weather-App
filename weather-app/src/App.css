@@ -43,11 +43,11 @@ font-weight: 600;
  background-color:rgb(210, 208, 208);
 
 }
-.degrees span.selected{
+.degrees h6.selected{
   font-weight: 600;
 }
 
-.degrees span:hover{
+.degrees h6:hover{
   font-weight:600;
   cursor:pointer;
   

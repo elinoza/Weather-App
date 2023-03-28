@@ -21,7 +21,6 @@ function Favs(props) {
 
       let response = await fetch(url + query);
       if (response.ok) {
-     
         let weather = await response.json();
         setData(weather.city);
         setDatalist(weather.list);
@@ -34,12 +33,7 @@ function Favs(props) {
       }
     } catch (error) {
       console.log("error", error);
- 
     }
-
-
-   
-  
   }, [props.geoCoo]);
   const kelToCelcius = (kel) => {
     return (kel - 273.15).toFixed(0);
@@ -48,38 +42,53 @@ function Favs(props) {
   //useEffect(()=>{getWeather()},[getWeather]) this is also working properly, I wonder why we didnt choose this version
 
   useEffect(getWeather, [props.geoCoo, getWeather]);
-
+  const celToFah = (cel) => {
+    return ((cel * 9) / 5 + 32).toFixed(0);
+  };
 
   return (
-    <Col className="fav-side-bar" onClick={()=> props.onClick(city.geoCoo)} xs={12} style={{ padding: "0px" }}>
-      <div    onClick={()=>props.deleteFavCity(city.geoCoo)}
-              className="sidebar-heart "><h6>Delete</h6></div>
+    <Col
+      className="fav-side-bar"
+      onClick={() => props.onClick(city.geoCoo)}
+      xs={12}
+      style={{ padding: "0px" }}
+    >
+      <div
+        onClick={() => props.deleteFavCity(city.geoCoo)}
+        className="sidebar-heart "
+      >
+        <h6>Delete</h6>
+      </div>
 
-              {dataCurrent.weather && 
-      <Card className=" city-card text-white">
-        <Card.Img
-          src="https://images.unsplash.com/photo-1558486012-817176f84c6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=970&q=80"
-        
-          alt="Card image"
-          className="card-img-class"
-        />
-        <Card.ImgOverlay className="card-city ">
-          <Card.Title >
-            <h6 className="  d-inline mr-auto">{city.favCity}</h6>
-        
-            
-          </Card.Title>
-          <Card.Text>
-            <div className="d-flex "> <p  className="d-inline mr-auto">   {dataCurrent.weather[0].description}</p> <p  className="d-inline">{kelToCelcius(dataCurrent.main.temp)} {"\u00B0"}C</p>
-            </div>
-           
-          
-       
-        </Card.Text>
-      
-        </Card.ImgOverlay>
-      </Card>
-      }
+      {dataCurrent.weather && (
+        <Card className=" city-card text-white">
+          <Card.Img
+            src="https://images.unsplash.com/photo-1558486012-817176f84c6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=970&q=80"
+            alt="Card image"
+            className="card-img-class"
+          />
+          <Card.ImgOverlay className="card-city ">
+            <Card.Title>
+              <h6 className="  d-inline mr-auto">{city.favCity}</h6>
+            </Card.Title>
+            <Card.Text>
+              <div className="d-flex ">
+                {" "}
+                <p className="d-inline mr-auto">
+                  {" "}
+                  {dataCurrent.weather[0].description}
+                </p>{" "}
+                <p className="d-inline">
+                {props.degrees === "celsius"
+                      ? (dataCurrent.main.temp).toFixed(0)+ "\u00B0" + "C"
+                      : celToFah(dataCurrent.main.temp) + "\u00B0" + "F"
+                    }
+                </p>
+              </div>
+            </Card.Text>
+          </Card.ImgOverlay>
+        </Card>
+      )}
     </Col>
   );
 }
