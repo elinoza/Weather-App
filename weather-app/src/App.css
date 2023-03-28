@@ -24,7 +24,7 @@ font-weight: 600;
   color:black;
   font-size: 12px;
   font-weight: 100;
-  /* padding:10px; */
+  padding:10px;
   position:absolute;
   z-index:1;
   top:40px;
@@ -40,7 +40,16 @@ font-weight: 600;
 
 }
 #dropDown-menu p:hover{
- background-color:rgb(210, 208, 208)
+ background-color:rgb(210, 208, 208);
+
+}
+.degrees span.selected{
+  font-weight: 600;
+}
+
+.degrees span:hover{
+  font-weight:600;
+  cursor:pointer;
   
 }
 @media only screen and (max-width:768px) {
@@ -50,7 +59,7 @@ font-weight: 600;
 }
 .special-sideBar-wrapper{
   height:100%;
-  background-color:black;
+  background-color:rgb(44, 41, 41);
   position:absolute;
   top:0px;
 right:0px;

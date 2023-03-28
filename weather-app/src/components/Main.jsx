@@ -27,33 +27,34 @@ function Main() {
   const [error, setError] = useState(false);
   const [sideBarOpen, setSideBar] = useState(false);
   const [possibleCities, setPossibleCities] = useState([]);
+  const [degrees,setDegrees]= useState("celsius")
 
-//change city to geoLocation
-const convertToGeoLoc=async(selectedCity)=>{
-  try {
-    //const url = process.env.REACT_APP_URL;
-    const url="http://api.openweathermap.org/geo/1.0/direct?"
-    const limit=10;
-    const key= process.env.REACT_APP_KEY
-    let query= `q=${selectedCity}&limit=${limit}&appid=${key}`
-    let response = await fetch(url+query)
-    if (response.ok){
-      let cities= await response.json()
-      console.log(cities)
-      setPossibleCities(cities)
-    }
-    else{
-      console.log(response)
-    }
-
-   
-
-  } catch (error) {
-    console.log(error)
-    
+  const geoCooModifier=(lat,lon)=>{
+let modifiedLat=lat.toFixed(4)
+let modifiedLon=lon.toFixed(4)
+let modifiedGeoCoo = `lat=${modifiedLat}&lon=${modifiedLon}`
+setGeoCoo(modifiedGeoCoo)
   }
- };
+  //change city to geoLocation
+  const convertToGeoLoc = async (selectedCity) => {
+    try {
+      //const url = process.env.REACT_APP_URL;
+      const url = "http://api.openweathermap.org/geo/1.0/direct?";
+      const limit = 10;
+      const key = process.env.REACT_APP_KEY;
+      let query = `q=${selectedCity}&limit=${limit}&appid=${key}`;
+      let response = await fetch(url + query);
+      if (response.ok) {
+        let cities = await response.json();
 
+        setPossibleCities(cities);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   /// get Me  and setMe
   const getMe = useCallback(async () => {
@@ -85,34 +86,32 @@ const convertToGeoLoc=async(selectedCity)=>{
   //componentDidMount -->
   useEffect(() => {
     getMe();
-    
   }, []);
 
-  const getCurrentLocation=()=>{
-    if (navigator.geolocation) { 
-      console.log("hey from geo")
-    navigator.geolocation.getCurrentPosition((position)=> {
-      const p=position.coords;
-      console.log("coor",p,p.latitude,p.longitude); setGeoCoo(`lat=${p.latitude}&lon=${p.longitude}`) })
-     
-}
-else{
-  console.log("Geolocation is not supported by this browser.")
-}
-   
-  }
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      console.log("hey from geo");
+      navigator.geolocation.getCurrentPosition((position) => {
+        const p = position.coords;
+        console.log("coor", p, p.latitude, p.longitude, position);
+
+       geoCooModifier(p.latitude,p.longitude)
+      
+
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
 
   useEffect(() => {
-getCurrentLocation()
-
+    getCurrentLocation();
   }, []);
 
-  const deleteFav = async (selectedCity) => {
+  const deleteFav = async (selectedGeoCoo) => {
     try {
-      let cityFound = favCollection.find(
-        (elem) => elem.favCity === selectedCity
-      );
-      console.log(cityFound._id);
+      let cityFound = favCollection.find((elem) => elem.geoCoo === geoCoo);
+      console.log(cityFound);
       const url = process.env.REACT_APP_URL;
       // const id ="6038f14842ca86203e481354";
       let query = `/users/${me._id}/favs/${cityFound._id}`;
@@ -136,7 +135,7 @@ getCurrentLocation()
   };
 
   const postFav = async () => {
-    if (city && city != "") {
+    if (geoCoo && geoCoo != "") {
       try {
         const url = process.env.REACT_APP_URL;
         // const id ="6038f14842ca86203e481354";
@@ -147,7 +146,7 @@ getCurrentLocation()
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ favCity: city }),
+          body: JSON.stringify({ favCity: city, geoCoo: geoCoo }),
 
           withCredentials: true, // use cookies
         });
@@ -176,10 +175,16 @@ getCurrentLocation()
   //   }
   // }, [favCity, postFav]);
 
-
-  
   const keyUp = (e) => {
     setTemp(e.currentTarget.value);
+    let insensitiveCity = e.currentTarget.value.toUpperCase();
+    if(e.currentTarget.value){convertToGeoLoc(insensitiveCity)};
+    if(e.currentTarget.value=== ""){
+      setError(false)
+      setPossibleCities([])
+      console.log(" form is clear")
+    }
+  
   };
   const toggleSideBar = () => {
     setSideBar(!sideBarOpen);
@@ -187,34 +192,78 @@ getCurrentLocation()
 
   const submitForm = (e) => {
     e.preventDefault();
-    let insensitiveCity = temporaryCity.toUpperCase();
-  convertToGeoLoc(insensitiveCity)
+
+    if(possibleCities.length=== 0){setError(true);
+    console.log(error,"error")}
+    //   let insensitiveCity = temporaryCity.toUpperCase();
+    // convertToGeoLoc(insensitiveCity)
+    if (possibleCities && possibleCities.length > 0) {
+      let lat = possibleCities[0].lat;
+      let lon = possibleCities[0].lon;
+      geoCooModifier(lat,lon)
+      setTemp("");
+      setPossibleCities([]);
+    }
   };
+
   const triggerError = (error) => {
     setError(error);
   };
-  const handleClick = (selectedCity) => {
-    setCity(selectedCity);
+
+  const handleClick = (selectedGeoCoo) => {
+    if(sideBarOpen){ toggleSideBar()}
+    setGeoCoo(selectedGeoCoo)
+
   };
-  const handleMainClick = () => {
-    if (sideBarOpen) {
-      setSideBar(!sideBarOpen);
-    }
+
+  // const handleMainClick = () => {
+  //   if (sideBarOpen) {
+  //     setSideBar(!sideBarOpen);
+  //   }
+  // };
+
+  const handleDropDownClick = (lat,lon) => {
+geoCooModifier(lat,lon)
+
+    setPossibleCities([]);
   };
-console.log(possibleCities)
+  const passCityNameToParent = (cityName) => {
+    setCity(cityName);
+    console.log(cityName, city);
+  };
+
+  console.log("rendered", possibleCities, geoCoo);
   return (
-    <Container onClick={handleMainClick} className="main-container text-white">
+    <Container  className="main-container text-white">
+  
       <Row className="main-row">
         <Col xs={12} md={9}>
           <div className="search-fav-form">
             {" "}
-            <form className=" search-form d-inline mt-3 text-white" onSubmit={submitForm}>
-              {error && temporaryCity != "" ? (
+            <form
+              className=" search-form d-inline mt-3 text-white"
+              onSubmit={submitForm}
+            >
+              {error && temporaryCity != ""  ? (
                 <div className="error-city">Please enter a valid city</div>
               ) : (
                 ""
               )}
-              {possibleCities && possibleCities.length >0 && <div id="dropDown-menu">{possibleCities.map((city)=><p onClick={()=>setGeoCoo(`lat=${city.lat}&lon=${city.lon}`)} className="mb-0 " >{city.name}, {city.state}, {city.country} </p>)}</div>}
+              {possibleCities && possibleCities.length > 0 && temporaryCity && (
+                <div id="dropDown-menu">
+                  {possibleCities.map((city) => (
+                    <p
+                      key={city.lat + city.lon}
+                      onClick={() =>
+                        handleDropDownClick(city.lat,city.lon)
+                      }
+                      className="mb-0 "
+                    >
+                      {city.name}, {city.state}, {city.country}{" "}
+                    </p>
+                  ))}
+                </div>
+              )}
               <div style={{ position: "relative" }} className="d-inline">
                 <input
                   className="search-input p-1 m-1"
@@ -228,13 +277,13 @@ console.log(possibleCities)
             <div className="d-inline mt-3">
               {" "}
               <GiHamburgerMenu onClick={toggleSideBar} id="hamburger-menu" />
-              {city && !error && (
+              {geoCoo && !error && (
                 <div className="d-inline  ml-auto hearts">
                   {favCollection &&
-                  favCollection.find((elem) => elem.favCity === city) ? (
+                  favCollection.find((elem) => elem.geoCoo === geoCoo) ? (
                     <MdFavorite
                       className=" heart fav-heart ml-4"
-                      onClick={() => deleteFav(city)}
+                      onClick={() => deleteFav(geoCoo)}
                     />
                   ) : (
                     <MdFavoriteBorder
@@ -248,7 +297,11 @@ console.log(possibleCities)
           </div>
 
           {geoCoo ? (
-            <CityApp triggerError={triggerError} geoCoo={geoCoo} />
+            <CityApp
+              triggerError={triggerError}
+              geoCoo={geoCoo}
+              passCityNameToParent={passCityNameToParent}
+            />
           ) : (
             ""
           )}
@@ -263,6 +316,7 @@ console.log(possibleCities)
                   onClick={handleClick}
                   deleteFavCity={deleteFav}
                   city={fav}
+                  geoCoo={fav.geoCoo}
                 />
               ))}
           </Row>
@@ -279,9 +333,15 @@ console.log(possibleCities)
                   onClick={handleClick}
                   deleteFavCity={deleteFav}
                   city={fav}
+                  geoCoo={fav.geoCoo}
                 />
               ))}
+            
           </Row>
+          <div className="d-flex py-3 px-2">    <MdSearch onClick={toggleSideBar} style={{fontSize:"1.3em"}} /> 
+         <h6 className="d-inline degrees ml-auto"> <span className={ degrees === "fahrenheit"? "selected" : "" } >{"\u00B0"} F</span> / <span className= { degrees === "celsius"? "selected" : "" }>{"\u00B0"}C</span></h6></div>
+         <div  onClick={toggleSideBar} style={{width:"100",height:"100%"}}></div>
+    
         </div>
       ) : (
         ""

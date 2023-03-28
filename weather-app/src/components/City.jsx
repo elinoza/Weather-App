@@ -19,10 +19,15 @@ export default function City(props) {
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
 
+
   // const [geoCoo, setGeoCoo] = useState("");
   const triggerError = (mode) => {
     props.triggerError(mode);
   };
+  const passCityNameToParent=(cityName)=>{
+props.passCityNameToParent(cityName)
+console.log(cityName)
+   }
 
   const getWeather = useCallback(async () => {
     try {
@@ -39,6 +44,7 @@ export default function City(props) {
         setData(weather.city);
         setDatalist(weather.list);
         setCurrent(weather.list[0]);
+        passCityNameToParent(weather.city.name)
 
         console.log("weather", weather);
         console.log("dataCurrent", data);
@@ -49,6 +55,10 @@ export default function City(props) {
       console.log("error", error);
       triggerError(true);
     }
+
+
+   
+  
   }, [props.geoCoo]);
 
   //useEffect(()=>{getWeather()},[getWeather]) this is also working properly, I wonder why we didnt choose this version
