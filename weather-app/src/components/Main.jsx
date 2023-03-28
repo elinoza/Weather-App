@@ -38,11 +38,12 @@ setGeoCoo(modifiedGeoCoo)
   //change city to geoLocation
   const convertToGeoLoc = async (selectedCity) => {
     try {
-      //const url = process.env.REACT_APP_URL;
-      const url = "http://api.openweathermap.org/geo/1.0/direct?";
-      const limit = 10;
+      const url = process.env.REACT_APP_URL;
+ 
+      
       const key = process.env.REACT_APP_KEY;
-      let query = `q=${selectedCity}&limit=${limit}&appid=${key}`;
+     
+      let query = `/api/geo/${selectedCity}`;
       let response = await fetch(url + query);
       if (response.ok) {
         let cities = await response.json();
@@ -110,8 +111,8 @@ setGeoCoo(modifiedGeoCoo)
 
   const deleteFav = async (selectedGeoCoo) => {
     try {
-      let cityFound = favCollection.find((elem) => elem.geoCoo === geoCoo);
-      console.log(cityFound);
+      let cityFound = favCollection.find((elem) => elem.geoCoo === selectedGeoCoo);
+      console.log("citfounded for deletion",cityFound);
       const url = process.env.REACT_APP_URL;
       // const id ="6038f14842ca86203e481354";
       let query = `/users/${me._id}/favs/${cityFound._id}`;

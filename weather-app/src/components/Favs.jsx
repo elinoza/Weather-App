@@ -7,9 +7,9 @@ function Favs(props) {
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
 
-  // useEffect(() => {
-  //   setCity(props.city);
-  // }, [setCity, props.city]);
+  useEffect(() => {
+    setCity(props.city);
+  }, [setCity, props.city]);
 
   const getWeather = useCallback(async () => {
     try {
@@ -51,8 +51,8 @@ function Favs(props) {
 
 
   return (
-    <Col className="fav-side-bar" onClick={()=> props.onClick(props.geoCoo)} xs={12} style={{ padding: "0px" }}>
-      <div    onClick={()=>props.deleteFavCity(props.geoCoo)}
+    <Col className="fav-side-bar" onClick={()=> props.onClick(city.geoCoo)} xs={12} style={{ padding: "0px" }}>
+      <div    onClick={()=>props.deleteFavCity(city.geoCoo)}
               className="sidebar-heart "><h6>Delete</h6></div>
 
               {dataCurrent.weather && 
@@ -65,7 +65,7 @@ function Favs(props) {
         />
         <Card.ImgOverlay className="card-city ">
           <Card.Title >
-            <h6 className="  d-inline mr-auto">{props.city.favCity}</h6>
+            <h6 className="  d-inline mr-auto">{city.favCity}</h6>
         
             
           </Card.Title>
