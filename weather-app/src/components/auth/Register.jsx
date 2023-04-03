@@ -48,11 +48,10 @@ try {
 
     <Container 
      id="signup-page-wrapper"
-     className="shadow d-flex  align-items-center"
-     style={{flexDirection:"column",
-     border: "none", padding:"20px"}}
+     className="shadow d-flex  align-items-center main-container justify-content-center "
+     style={{border: "none", padding:"20px"}}
      >
-      <h3 className="">Add your favourite cities by signing up! </h3>
+    
       <div className="form-inputs">
         <form className="form" onSubmit={signUp} >
         <label>Name </label>

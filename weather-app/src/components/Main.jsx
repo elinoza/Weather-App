@@ -14,9 +14,12 @@ import {
 } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder, MdSearch } from "react-icons/md";
 import { GiCondorEmblem, GiHamburgerMenu } from "react-icons/gi";
+import {IoLogOut} from 'react-icons/io5'
+import {useHistory} from 'react-router-dom'
 
 import CityApp from "./City";
 import Favs from "./Favs";
+
 
 function Main() {
   const [me, setMe] = useState([]);
@@ -28,6 +31,7 @@ function Main() {
   const [sideBarOpen, setSideBar] = useState(false);
   const [possibleCities, setPossibleCities] = useState([]);
   const [degrees, setDegrees] = useState("celsius");
+  const history = useHistory()
 
   const geoCooModifier = (lat, lon) => {
     let modifiedLat = lat.toFixed(4);
@@ -163,6 +167,10 @@ function Main() {
       console.log("choose a city to ad to favorites");
     }
   };
+  const handleLogout=()=>{
+    localStorage.removeItem("token")
+    history.push("/")
+  }
 
   // useEffect(postFav,[favCity,postFav])
 
@@ -280,9 +288,9 @@ function Main() {
                 <MdSearch className="search-icon" />
               </div>
             </form>
-            <div className="d-inline ">
+            <div className="icon-wrapper d-inline ">
               {" "}
-              <div className="d-inline degrees ml-4 ">
+              <div className="d-inline degrees ml-2  ">
               {" "}
               <h6 onClick={toggleDegrees} className={degrees === "fahrenheit" ? "selected d-inline" : "d-inline"}>
                 {"\u00B0"} F /
@@ -293,23 +301,24 @@ function Main() {
               </h6>
             </div>
               
-              <GiHamburgerMenu className="ml-4" onClick={toggleSideBar} id="hamburger-menu" />
+              <GiHamburgerMenu className="ml-2" onClick={toggleSideBar} id="hamburger-menu" />
               {geoCoo && !error && (
-                <div className="d-inline hearts">
+                <div className="d-inline hearts ml-2">
                   {favCollection &&
                   favCollection.find((elem) => elem.geoCoo === geoCoo) ? (
                     <MdFavorite
-                      className=" heart fav-heart ml-4"
+                      className=" heart fav-heart"
                       onClick={() => deleteFav(geoCoo)}
                     />
                   ) : (
                     <MdFavoriteBorder
-                      className="heart ml-4"
+                      className="heart "
                       onClick={() => postFav()}
                     />
                   )}
                 </div>
               )}
+             < IoLogOut  onClick={handleLogout}className="ml-2" id="logout-icon"/>
             </div>
           </div>
 

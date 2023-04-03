@@ -73,18 +73,14 @@ const Login = () => {
 
     <Container 
      id="signup-page-wrapper"
-     className="shadow d-flex  align-items-center"
+     className="shadow d-flex  align-items-center main-container justify-content-center"
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >
-       <h6 className="">WELCOME TO WEATHER APP </h6>
+
       
-      <div className="signup-items mt-5">
-        
-      
-        <a href={process.env.BACKEND_URL+"/users/googleLogin"} > <FcGoogle style={{ fontSize:"40px"}}/> <Button className="signup-btn google my-2">CONTINUE WITH GOOGLE</Button></a>
-      </div>
-      <h6>OR</h6>
+
+     
       <div className="form-inputs">
         <form className="form" onSubmit={login} >
    
@@ -119,9 +115,15 @@ const Login = () => {
           </div>
       
         </form>
+       
         <hr />
-        <h4 className="text-center mb-3">Don't have an account?</h4>
-        <button onClick={() => (window.location = "/register") } id="bottom-btn">SIGN UP </button>
+       
+        <div className=" my-2">
+        
+        <a href={process.env.BACKEND_URL+"/users/googleLogin"} >  <Button className="  google-button buttons "><FcGoogle id="googleIcon" />Continue with Google </Button></a>
+      </div>
+       
+        <button onClick={() => (window.location = "/register") } className="buttons " id="bottom-btn"> Dont have an account? Sign Up </button>
       </div>
     </Container>
 
