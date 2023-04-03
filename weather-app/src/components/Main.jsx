@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useContext} from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import {
@@ -19,7 +20,8 @@ import {useHistory} from 'react-router-dom'
 
 import CityApp from "./City";
 import Favs from "./Favs";
-
+import ThemeToggler from "./themeToggler";
+import {ThemeContext,Themes} from "../contexts/theme"
 
 function Main() {
   const [me, setMe] = useState([]);
@@ -32,6 +34,7 @@ function Main() {
   const [possibleCities, setPossibleCities] = useState([]);
   const [degrees, setDegrees] = useState("celsius");
   const history = useHistory()
+  const [theme,setTheme] = useContext(ThemeContext)
 
   const geoCooModifier = (lat, lon) => {
     let modifiedLat = lat.toFixed(4);
@@ -251,7 +254,7 @@ function Main() {
 
   console.log("rendered", possibleCities, geoCoo);
   return (
-    <Container className="main-container text-white">
+    <Container className={`main-container text-white ${theme}`}>
       <Row className="main-row">
         <Col xs={12} md={9}>
           <div className="search-fav-form">
@@ -288,6 +291,7 @@ function Main() {
                 <MdSearch className="search-icon" />
               </div>
             </form>
+            <ThemeToggler/>
             <div className="icon-wrapper d-inline ">
               {" "}
               <div className="d-inline degrees ml-2  ">

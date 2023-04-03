@@ -1,5 +1,5 @@
 import { getByDisplayValue } from "@testing-library/react";
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback ,useContext} from "react";
 import { GrFavorite } from "react-icons/gr";
 
 import {
@@ -13,11 +13,14 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
+import { ThemeContext,Themes } from "../contexts/theme";
 
 export default function City(props) {
   const [data, setData] = useState([]);
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
+  const [theme,setTheme]= useContext(ThemeContext)
+  console.log(theme)
 
   // const [geoCoo, setGeoCoo] = useState("");
   const triggerError = (mode) => {
@@ -43,10 +46,13 @@ export default function City(props) {
         setData(weather.city);
         setDatalist(weather.list);
         setCurrent(weather.list[0]);
+        setTheme(weather.list[0].weather[0].main)
+        console.log(weather.list[0].weather[0].main)
         passCityNameToParent(weather.city.name);
 
         console.log("weather", weather);
-        console.log("dataCurrent", data);
+        console.log("dataCurrent", dataCurrent);
+        console.log("date" ,dataCurrent.dt_txt, dataCurrent.dt);
       } else {
         console.log(response);
       }
