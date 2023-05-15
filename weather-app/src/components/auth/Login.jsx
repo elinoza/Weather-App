@@ -120,7 +120,7 @@ const Login = () => {
        
         <div className=" my-2">
         
-        <a href={process.env.BACKEND_URL+"/users/googleLogin"} >  <Button className="  google-button buttons "><FcGoogle id="googleIcon" />Continue with Google </Button></a>
+        <a href={process.env.REACT_APP_URL+"/users/googleLogin"} >  <Button className="  google-button buttons "><FcGoogle id="googleIcon" />Continue with Google </Button></a>
       </div>
        
         <button onClick={() => (window.location = "/register") } className="buttons " id="bottom-btn"> Dont have an account? Sign Up </button>
