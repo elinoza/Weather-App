@@ -47,7 +47,7 @@ function Main() {
     try {
       const url = process.env.REACT_APP_URL;
 
-      const key = process.env.REACT_APP_KEY;
+
 
       let query = `/api/geo/${selectedCity}`;
       let response = await fetch(url + query);
