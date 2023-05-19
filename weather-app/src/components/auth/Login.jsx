@@ -49,11 +49,11 @@ const Login = () => {
       console.log(res)
      // localStorage.setItem("token", res.data)
        //window.location.replace("/Main")
-      if (res.statusText==="OK"){
+      if (res.statusText==="OK"|| res.status===200){
       localStorage.setItem("token", res.data)
        history.push("/Main")
       }
-      else{console.log(res)
+      else{console.log(res.status,"res.status")
     }
     
       
