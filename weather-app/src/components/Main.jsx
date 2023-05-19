@@ -6,12 +6,7 @@ import {
   Col,
   Container,
   Row,
-  ButtonGroup,
-  DropdownButton,
-  Dropdown,
-  Pagination,
-  Button,
-  Form,
+
 } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder, MdSearch } from "react-icons/md";
 import { GiCondorEmblem, GiHamburgerMenu } from "react-icons/gi";
@@ -20,7 +15,7 @@ import {useHistory} from 'react-router-dom'
 
 import CityApp from "./City";
 import Favs from "./Favs";
-import ThemeToggler from "./themeToggler";
+
 import {ThemeContext,Themes} from "../contexts/theme"
 
 function Main() {
@@ -291,7 +286,7 @@ function Main() {
                 <MdSearch className="search-icon" />
               </div>
             </form>
-            <ThemeToggler/>
+        
             <div className="icon-wrapper d-inline ">
               {" "}
               <div className="d-inline degrees ml-2  ">

@@ -92,6 +92,12 @@ export default function City(props) {
   const celToFah = (cel) => {
     return ((cel * 9) / 5 + 32).toFixed(0);
   };
+
+  const capitalizeFirstLetter=(string)=>{
+    let newArr=string.split(" ").map((elem=>elem.charAt(0).toUpperCase()+elem.slice(1)))
+    return newArr.join(" ")
+
+  }
   let i = 0;
 
   return (
@@ -116,7 +122,7 @@ export default function City(props) {
                     }
                   </h1>
 
-                  <h3 className="">{dataCurrent.weather[0].description}</h3>
+                  <h3 className="">{capitalizeFirstLetter(dataCurrent.weather[0].description)}</h3>
                   <h5>{getDay(0)}</h5>
                 </Col>
               )}
