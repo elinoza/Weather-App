@@ -89,7 +89,7 @@ font-weight: 600;
   font-weight: 600;
 }
 
-.degrees p:hover{
+.degrees h6:hover{
   font-weight:600;
   cursor:pointer;
   
@@ -111,11 +111,14 @@ right:0px;
   animation: sideBar 1s ease-in both
 
 }
+
+
 @keyframes sideBar {
   0%{width:0px}
   100%{width:100%}
   
 }
+
 
 .search-fav-form{
   position:absolute;
@@ -127,7 +130,7 @@ right:0px;
   padding-left: 20px;
   padding-right: 20px;
   display:flex;
-  align-items:center;
+  align-items:end;
 justify-content:space-between
 
 }
@@ -199,7 +202,7 @@ transform:scale(1.1) */
 .sidebar-heart{ 
   background-color:red;
   font-weight: 100;
-  padding:10px;
+  padding:5px;
   font-weight:100;
   font-size: 0.8rem;
   
@@ -230,7 +233,7 @@ transition: 1s
 }
 
 .fav-side-bar:hover  .city-card{
-transform:scale(1.1);
+transform:scale(1.08);
 
 
 }
@@ -258,9 +261,10 @@ transform:scale(1.1);
   height:80px;
   border:none;
 
-  box-shadow: 6px 10px 7px -10px #ffffffcc;
+  box-shadow: 0px 10px 7px -10px #ffffffcc;
   transition:0.5s linear;
   transform-origin: center;
+  overflow:hidden
 
 
 }
@@ -270,8 +274,9 @@ transform:scale(1.1);
 }
 .card-img-class
   {
-  object-fit: cover;
-  height:  100%;opacity:0}
+  object-fit: cover;opacity:1;    height:  100%;opacity:0}
+
+
 
 
 .form {
@@ -408,5 +413,5 @@ transform:scale(1.1);
 
 }
 .icons{
-  font-size:21px
+  font-size:23px
 }

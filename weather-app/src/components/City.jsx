@@ -14,6 +14,7 @@ import {
   Form,
 } from "react-bootstrap";
 import { ThemeContext,Themes } from "../contexts/theme";
+import {capitalizeFirstLetter,celToFah} from "../functions/functions" 
 
 export default function City(props) {
   const [data, setData] = useState([]);
@@ -89,15 +90,9 @@ export default function City(props) {
     return days[normalizedIndex];
   };
 
-  const celToFah = (cel) => {
-    return ((cel * 9) / 5 + 32).toFixed(0);
-  };
 
-  const capitalizeFirstLetter=(string)=>{
-    let newArr=string.split(" ").map((elem=>elem.charAt(0).toUpperCase()+elem.slice(1)))
-    return newArr.join(" ")
 
-  }
+
   let i = 0;
 
   return (

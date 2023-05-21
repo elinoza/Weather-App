@@ -48,7 +48,7 @@ try {
 
     <Container 
      id="signup-page-wrapper"
-     className="shadow d-flex  align-items-center main-container justify-content-center "
+     className="Atmosphere shadow d-flex  align-items-center main-container justify-content-center "
      style={{border: "none", padding:"20px"}}
      >
     

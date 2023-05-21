@@ -73,7 +73,7 @@ const Login = () => {
 
     <Container 
      id="signup-page-wrapper"
-     className="shadow d-flex  align-items-center main-container justify-content-center"
+     className="Atmosphere shadow d-flex  align-items-center main-container justify-content-center"
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >

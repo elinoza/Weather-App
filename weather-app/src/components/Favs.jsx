@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useMemo, useContext,useCallback } from "react";
 import { Container, Card, Col, Row } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
-import { ThemeContext ,Themes} from "../contexts/theme";
+import {capitalizeFirstLetter,celToFah} from "../functions/functions"
+
 function Favs(props) {
   const [city, setCity] = useState({});
   const [data, setData] = useState([]);
   const [dataList, setDatalist] = useState([]);
   const [dataCurrent, setCurrent] = useState([]);
-  const [theme,setTheme]= useContext(ThemeContext)
+  const [ weatherDescription,setWeatherDescription]=useState([])
+
 
   useEffect(() => {
     setCity(props.city);
@@ -27,6 +29,7 @@ function Favs(props) {
         setData(weather.city);
         setDatalist(weather.list);
         setCurrent(weather.list[0]);
+       setWeatherDescription(weather.list[0].weather[0].main)
 
         console.log("weather", weather);
         console.log("dataCurrent", data);
@@ -44,9 +47,7 @@ function Favs(props) {
   //useEffect(()=>{getWeather()},[getWeather]) this is also working properly, I wonder why we didnt choose this version
 
   useEffect(getWeather, [props.geoCoo, getWeather]);
-  const celToFah = (cel) => {
-    return ((cel * 9) / 5 + 32).toFixed(0);
-  };
+
 
   return (
     <Col
@@ -55,30 +56,27 @@ function Favs(props) {
       xs={12}
       style={{ padding: "0px" }}
     >
-      <div
-        onClick={() => props.deleteFavCity(city.geoCoo)}
-        className="sidebar-heart "
-      >
-        <h6>Delete</h6>
-      </div>
+   
 
       {dataCurrent.weather && (
-        <Card className={` city-card text-white `}>
+        <Card className={` city-card  text-white `}>
+          
           <Card.Img
-            src="https://images.unsplash.com/photo-1558486012-817176f84c6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=970&q=80"
+            src=""
             alt="Card image"
-            className={`card-img-class `}
+            className="card-img-class "
           />
-          <Card.ImgOverlay className="card-city  ">
+        {props.fromSideBar? console.log("true"):console.log("false")}
+          <Card.ImgOverlay className={props.fromSideBar ? `${weatherDescription} card-city`: `card-city`}>
             <Card.Title>
-              <h6 className="  d-inline mr-auto">{city.favCity}</h6>
+              <h6 className="  d-inline mr-auto">{city.favCity} </h6>
             </Card.Title>
             <Card.Text>
               <div className="d-flex ">
                 {" "}
                 <p className="d-inline mr-auto">
                   {" "}
-                  {dataCurrent.weather[0].description}
+                  {capitalizeFirstLetter(dataCurrent.weather[0].description) }
                 </p>{" "}
                 <p className="d-inline">
                 {props.degrees === "celsius"
@@ -89,6 +87,12 @@ function Favs(props) {
               </div>
             </Card.Text>
           </Card.ImgOverlay>
+          <div
+        onClick={() => props.deleteFavCity(city.geoCoo)}
+        className="sidebar-heart "
+      >
+        <h6>Delete</h6>
+      </div>
         </Card>
       )}
     </Col>

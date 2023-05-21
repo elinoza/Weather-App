@@ -18,6 +18,8 @@ import Favs from "./Favs";
 
 import {ThemeContext,Themes} from "../contexts/theme"
 
+
+
 function Main() {
   const [me, setMe] = useState([]);
   const [city, setCity] = useState("");
@@ -252,7 +254,7 @@ function Main() {
     <Container className={`main-container text-white ${theme}`}>
       <Row className="main-row">
         <Col xs={12} md={9}>
-          <div className="search-fav-form">
+          <div className="search-fav-form mt-1">
             {" "}
             <form
               className=" search-form d-inline mt-3 text-white"
@@ -289,7 +291,7 @@ function Main() {
         
             <div className="icon-wrapper d-inline ">
               {" "}
-              <div className="d-inline degrees ml-2  ">
+              <div className="d-inline degrees ml-3  ">
               {" "}
               <h6 onClick={toggleDegrees} className={degrees === "fahrenheit" ? "selected d-inline" : "d-inline"}>
                 {"\u00B0"} F /
@@ -300,9 +302,9 @@ function Main() {
               </h6>
             </div>
               
-              <GiHamburgerMenu className="ml-2 icons" onClick={toggleSideBar} id="hamburger-menu" />
+              <GiHamburgerMenu className="ml-3 icons" onClick={toggleSideBar} id="hamburger-menu" />
               {geoCoo && !error && (
-                <div className="d-inline hearts icons ml-2">
+                <div className="d-inline hearts icons ml-3">
                   {favCollection &&
                   favCollection.find((elem) => elem.geoCoo === geoCoo) ? (
                     <MdFavorite
@@ -317,7 +319,7 @@ function Main() {
                   )}
                 </div>
               )}
-             < IoLogOut  onClick={handleLogout} className=" icons ml-2" id="logout-icon"/>
+             < IoLogOut  onClick={handleLogout} className=" icons ml-3" id="logout-icon"/>
             </div>
           </div>
 
@@ -351,23 +353,10 @@ function Main() {
       </Row>
 
       {sideBarOpen ? (
-        <div className="special-sideBar-wrapper">
-          <Row className="special-sideBar">
-            {favCollection &&
-              favCollection.map((fav) => (
-                <Favs
-                  key={fav._id}
-                  onClick={handleClick}
-                  deleteFavCity={deleteFav}
-                  city={fav}
-                  geoCoo={fav.geoCoo}
-                  degrees={degrees}
-                />
-              ))}
-          </Row>
+        <div className="special-sideBar-wrapper ">
           <div className="d-flex py-3 px-2">
             {" "}
-            <MdSearch onClick={toggleSideBar} style={{ fontSize: "1.3em" }} />
+            <GiHamburgerMenu className="icons" onClick={toggleSideBar} id="hamburger-menu" />
             <div className="d-inline degrees ml-auto">
               {" "}
               <h6 onClick={toggleDegrees} className={degrees === "fahrenheit" ? "selected d-inline" : "d-inline"}>
@@ -379,6 +368,22 @@ function Main() {
               </h6>
             </div>
           </div>
+          
+          <Row className="special-sideBar">
+            {favCollection &&
+              favCollection.map((fav) => (
+                <Favs
+                  key={fav._id}
+                  onClick={handleClick}
+                  deleteFavCity={deleteFav}
+                  city={fav}
+                  geoCoo={fav.geoCoo}
+                  degrees={degrees}
+                  fromSideBar={true}
+                />
+              ))}
+          </Row>
+          
           <div
             onClick={toggleSideBar}
             style={{ width: "100", height: "100%" }}
