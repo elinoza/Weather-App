@@ -283,7 +283,7 @@ function Main() {
                   onChange={keyUp}
                   value={temporaryCity}
                 />
-                <MdSearch className="search-icon" />
+                <MdSearch className="search-icon icons" />
               </div>
             </form>
         
@@ -300,9 +300,9 @@ function Main() {
               </h6>
             </div>
               
-              <GiHamburgerMenu className="ml-2" onClick={toggleSideBar} id="hamburger-menu" />
+              <GiHamburgerMenu className="ml-2 icons" onClick={toggleSideBar} id="hamburger-menu" />
               {geoCoo && !error && (
-                <div className="d-inline hearts ml-2">
+                <div className="d-inline hearts icons ml-2">
                   {favCollection &&
                   favCollection.find((elem) => elem.geoCoo === geoCoo) ? (
                     <MdFavorite
@@ -317,7 +317,7 @@ function Main() {
                   )}
                 </div>
               )}
-             < IoLogOut  onClick={handleLogout}className="ml-2" id="logout-icon"/>
+             < IoLogOut  onClick={handleLogout} className=" icons ml-2" id="logout-icon"/>
             </div>
           </div>
 

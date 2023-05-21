@@ -50,7 +50,7 @@ font-weight: 600;
 }
 
 #hamburger-menu{
-  font-size: 20px;
+
   display:none;
 
 }
@@ -82,11 +82,14 @@ font-weight: 600;
  background-color:rgb(210, 208, 208);
 
 }
+.degrees h6{
+  font-size:0.9em
+}
 .degrees h6.selected{
   font-weight: 600;
 }
 
-.degrees h6:hover{
+.degrees p:hover{
   font-weight:600;
   cursor:pointer;
   
@@ -181,7 +184,7 @@ transform:scale(1.1) */
 
 .search-icon{
   position:absolute;
-  font-size: 22px;
+
     top: 0px;
     right: 8px;
     color: #ffffffcc;
@@ -225,7 +228,8 @@ transition: 1s
   transition:0.5s linear;
   transform-origin: center;
 }
-.fav-side-bar:hover  .card-city{
+
+.fav-side-bar:hover  .city-card{
 transform:scale(1.1);
 
 
@@ -254,8 +258,14 @@ transform:scale(1.1);
   height:80px;
   border:none;
 
-  box-shadow: 0px -6px 7px -7px #ffffffcc;
+  box-shadow: 6px 10px 7px -10px #ffffffcc;
+  transition:0.5s linear;
+  transform-origin: center;
 
+
+}
+.card-text p{
+  font-size:0.9em
 
 }
 .card-img-class
@@ -393,7 +403,10 @@ transform:scale(1.1);
 }
 
 #logout-icon{
-  font-size:30px;
+
   cursor:pointer;
 
+}
+.icons{
+  font-size:21px
 }
