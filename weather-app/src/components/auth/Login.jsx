@@ -16,7 +16,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("test@test.com")
   const [password, setPassword] = useState("test12345")
-  const [error, setError] = useState("jjj")
+  const [error, setError] = useState("")
   const history = useHistory()
 
   const getTokens = async () => {
@@ -54,12 +54,14 @@ const Login = () => {
        history.push("/Main")
       }
       else{console.log(res.status,"res.status")
+      setError("Email or password is not correct")
     }
     
       
     } catch (error) {
     
-      console.log(error)
+      console.log("error from catch",error)
+      setError("Email or password is not correct")
     }
       
     };
@@ -73,7 +75,7 @@ const Login = () => {
 
     <Container 
      id="signup-page-wrapper"
-     className="Atmosphere shadow d-flex  align-items-center main-container justify-content-center"
+     className="shadow d-flex  ThunderStorm align-items-center main-container justify-content-center"
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >
@@ -106,6 +108,7 @@ const Login = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <p class="text-danger">{error}</p>
           <br />
           <a href="#"> Forgot your password? </a>
           <div className="submit-btn">
@@ -123,7 +126,7 @@ const Login = () => {
         <a href={process.env.REACT_APP_URL+"/users/googleLogin"} >  <Button className="  google-button buttons "><FcGoogle id="googleIcon" />Continue with Google </Button></a>
       </div>
        
-        <button onClick={() => (window.location = "/register") } className="buttons " id="bottom-btn"> Dont have an account? Sign Up </button>
+        <button onClick={() => (window.location = "/register") } className="buttons "> Dont have an account? Sign Up </button>
       </div>
     </Container>
 

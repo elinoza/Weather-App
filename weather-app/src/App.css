@@ -5,6 +5,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
 font-weight: 600;
+color:white;
 
 }
 .main-container{
@@ -27,7 +28,8 @@ font-weight: 600;
 
   }
   .ThunderStorm{
-    background-image:url("https://images.unsplash.com/photo-1579004464832-0c014afa448c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+    background-image:url("https://images.unsplash.com/photo-1579004464832-0c014afa448c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+ 
   }
   .Drizzle{
     background-image:url("https://images.unsplash.com/photo-1605488483923-a5b3ac0a1a17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
@@ -130,7 +132,7 @@ right:0px;
   padding-left: 20px;
   padding-right: 20px;
   display:flex;
-  align-items:end;
+  align-items:flex-end;
 justify-content:space-between
 
 }
@@ -290,18 +292,22 @@ transform:scale(1.08);
 }
 
 .form-input {
-  height: 40px;
+  border: none;
+  box-shadow: 0rem 1rem 9px 1px rgba(0,0,0,.25);
+  font-size:0.9em
 }
 
 .form-input-submit {
   width: 200px;
-  height: 40px;
+  height: 30px;
   background-color: rgb(8, 155, 8);
   border: none;
   border-radius: 20px;
   color: white;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-weight: bold;
+  font-size:0.9em;
+  box-shadow: 0rem 0.5rem 6px 0px rgba(0,0,0,.15);
+  
 
 }
 .submit-btn {
@@ -320,38 +326,36 @@ transform:scale(1.08);
 
 
 .buttons{
-  height: 40px;
+  height: 30px;
   width:100%;
   background-color: white;
   color: rgb(53, 53, 53);
   letter-spacing: 1px;
-  border: 2px solid black;
+border:none;
   border-radius: 30px;
+  box-shadow: 0rem 0.5rem 6px 0px rgba(0,0,0,.15);
+  font-size:0.9em
 
 }
 
 
 
-.google-button:hover {
-  background-color: rgb(105, 105, 105);
+.buttons:hover {
+  background-color: rgb(194, 190, 190);
   color: rgb(253, 253, 253);
 
   border:none;
 }
 
 #googleIcon{
-  font-size:30px;
+  font-size:21px;
   margin-right:10px;
 
 }
 
 
 
-#bottom-btn:hover {
-  background-color: rgb(121, 120, 120);
-  
-  border:none;
-}
+
 
 
 #signup {
@@ -370,7 +374,9 @@ transform:scale(1.08);
   width: 70%;
   font-weight: 600;
 }
-
+#bottom-btn{
+  font-weight:bold
+}
 
 #signup-page-logo {
   width: 200px;
