@@ -3,19 +3,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container,Button } from "react-bootstrap";
 import {useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
+import { emailRegex } from "../../functions/functions";
 
 const Register =()=>{
 
 
-    const [email, setEmail] = useState("test@test.com")
-    const [password, setPassword] = useState("test12345")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
-    const [error, setError] = useState("jjj")
+    const [error, setError] = useState("")
+    const [emailError, setEmailError] = useState("")
+
     const history = useHistory()
+    
   
 const signUp=async (e)=>{
 e.preventDefault()
+if(emailValidation){
 try {
     const url = process.env.REACT_APP_URL;
  
@@ -43,28 +48,43 @@ try {
     console.log(error)
 }
 }
+}
+
+const emailValidation=()=>{
+if( !email|| emailRegex.test(email)=== false){
+  setEmailError("Email is not valid")
+  return false
+
+}
+{return true}
+
+}
+
+
     return (
         <>
 
     <Container 
      id="signup-page-wrapper"
-     className="Atmosphere shadow d-flex  align-items-center main-container justify-content-center "
+     className="ThunderStorm shadow d-flex  align-items-center main-container justify-content-center "
      style={{border: "none", padding:"20px"}}
      >
     
       <div className="form-inputs">
-        <form className="form" onSubmit={signUp} >
+        <form className="form" onSubmit={signUp} novalidate>
         <label>Name </label>
           <input
-            className="form-input"
+            className="form-input "
             id="name" // WITH THIS ID IT CHECKS IF IT'S A VALID name
             name="name"
             type="name"
             placeholder=""
             value={name} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setName(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
+            required
 
           />
+        
           <br />
           <label>Surname </label>
           <input
@@ -75,7 +95,7 @@ try {
             placeholder=""
             value={surname} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setSurname(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
-
+            required
           />
           <br />
    
@@ -88,7 +108,7 @@ try {
             placeholder="Email adress "
             value={email} // TAKES THE VALUE FROM MY CUSTOM HOOKS IN USEFORM COMPONENT
             onChange={e => setEmail(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
-
+            required
           />
           <br />
           <label>Password</label>
@@ -100,6 +120,7 @@ try {
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            required
           />
           <br />
   <input   className="form-input-submit align-self-center" type="submit" value="SIGN UP" />
@@ -108,7 +129,7 @@ try {
         </form>
         <hr />
         <h4 className="text-center mb-3">Do you already have an account?</h4>
-        <button onClick={() => (window.location = "/") } id="bottom-btn">LOG IN </button>
+        <button onClick={() => (window.location = "/") } className="buttons" id="bottom-btn">LOGIN </button>
         </div>
     </Container>
 
