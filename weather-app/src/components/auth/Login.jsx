@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 
 
 
+
 const Login = () => {
   // const { handleChange, values, handleSubmit } = useForm(); // DESTRUCTURING HOOKS TO BE ABLE TO USE THEM IN THIS COMPONENT
 
@@ -18,6 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState("test12345")
   const [error, setError] = useState("")
   const history = useHistory()
+  const[theme,setTheme]=useState("ThunderStorm")
 
   const getTokens = async () => {
     const queryString = window.location.search;
@@ -31,6 +33,13 @@ const Login = () => {
     window.location.replace("/Main");
     }
   };
+
+  const themeToggler=()=>{
+    const themes=["Clear","ThunderStorm","Drizzle","Rain","Snow","Atmosphere","Clouds"]
+    const count=themes.map((elem,i)=>
+  setTimeout(()=>{{setTheme(elem)};console.log(theme,elem)}, 4000*i))
+  }
+
 
   const login = async (e)=> {
     try {
@@ -67,15 +76,56 @@ const Login = () => {
     };
     useEffect(() => {
       getTokens()
+      themeToggler()
  
     }, []);
     
+
+
+    const resetPassword=async(e)=>{
+      e.preventDefault()
+      try {
+       
+        const url=process.env.REACT_APP_URL
+        const query= "/users/send/email"
+        console.log("email",email)
+        let res= await fetch(url+query,{
+          method:"POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({email:email }),
+          withCredentials: true, // use cookies
+          
+        }
+          )
+
+          if (res.ok){
+            console.log(res)
+
+          }
+          else{
+            setError("Email not found.")
+            console.log(res)
+
+          }
+
+
+
+      } catch (error) {
+        setError("Email not found or valid")
+        console.log(error)
+        
+      }
+    }
+
+   
   return (
 
 
     <Container 
      id="signup-page-wrapper"
-     className="shadow d-flex  ThunderStorm align-items-center main-container justify-content-center"
+     className={`shadow d-flex  ${theme} align-items-center main-container justify-content-center`}
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >
@@ -108,9 +158,9 @@ const Login = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <p class="text-danger">{error}</p>
-          <br />
-          <a href="#"> Forgot your password? </a>
+          <p className="text-danger">{error}</p>
+   
+          <button onClick={resetPassword } id="forgotUrPasswordBtn"> Forgot your password? </button> 
           <div className="submit-btn">
             <input type="checkbox" id="checkbox" className="my-auto" />
             <p className="ml-n5 my-auto">Remember me</p>

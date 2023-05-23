@@ -6,3 +6,5 @@ export const capitalizeFirstLetter=(string)=>{
     return ((cel * 9) / 5 + 32).toFixed(0);
   };
   export const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+

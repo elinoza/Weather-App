@@ -22,25 +22,24 @@ color:white;
     background-repeat: no-repeat;
   }
 
-
   .Clear{
     background-image:url("https://images.unsplash.com/photo-1419833173245-f59e1b93f9ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
 
   }
   .ThunderStorm{
-    background-image:url("https://images.unsplash.com/photo-1579004464832-0c014afa448c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+    background-image:url("https://images.unsplash.com/photo-1527572756213-1cda99a355c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80");
  
   }
   .Drizzle{
-    background-image:url("https://images.unsplash.com/photo-1605488483923-a5b3ac0a1a17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+    background-image:url("https://images.unsplash.com/photo-1635823288719-93f2c8ac7f3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80")
   }
   .Rain{
-    background-image:url("https://images.unsplash.com/photo-1525087740718-9e0f2c58c7ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" ) }
+    background-image:url("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" ) }
   .Snow{
-    background-image:url("https://images.unsplash.com/photo-1547754980-3df97fed72a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+    background-image:url("https://images.unsplash.com/photo-1542601098-8fc114e148e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80")
   }
   .Atmosphere{
-    background-image:url("https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
+    background-image:url("https://images.unsplash.com/photo-1524252500348-1bb07b83f3be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
   }
   .Clouds{
     background-image:url("https://images.unsplash.com/photo-1496925126225-5ca06bfbc630?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80")
@@ -337,6 +336,26 @@ border:none;
   font-size:0.9em
 
 }
+
+#forgotUrPasswordBtn{
+  border:none;
+  background-color:transparent;
+  color:inherit;
+  
+  font-size:0.9em;
+  font-weight:bold;
+  padding:0px;
+
+text-align:start
+
+}
+
+#forgotUrPasswordBtn:hover{
+color:rgb(53, 51, 195);
+text-decoration: underline;
+}
+
+
 
 
 
