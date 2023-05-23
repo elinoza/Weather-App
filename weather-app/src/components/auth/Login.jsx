@@ -32,6 +32,9 @@ const Login = () => {
     }
   };
 
+
+
+
   const login = async (e)=> {
     try {
       e.preventDefault()
@@ -70,6 +73,44 @@ const Login = () => {
  
     }, []);
     
+
+
+    const resetPassword=async(e)=>{
+      e.preventDefault()
+      try {
+       
+        const url=process.env.REACT_APP_URL
+        const query= "/users/send/email"
+        console.log("email",email)
+        let res= await fetch(url+query,{
+          method:"POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({email:email }),
+          withCredentials: true, // use cookies
+          
+        }
+          )
+
+          if (res.ok){
+            console.log(res)
+
+          }
+          else{
+            setError("Email not found.")
+            console.log(res)
+
+          }
+
+
+
+      } catch (error) {
+        setError("Email not found or valid")
+        console.log(error)
+        
+      }
+    }
   return (
 
 
@@ -109,8 +150,8 @@ const Login = () => {
             onChange={e => setPassword(e.target.value)}
           />
           <p class="text-danger">{error}</p>
-          <br />
-          <a href="#"> Forgot your password? </a>
+   
+          <button onClick={resetPassword } id="forgotUrPasswordBtn"> Forgot your password? </button> 
           <div className="submit-btn">
             <input type="checkbox" id="checkbox" className="my-auto" />
             <p className="ml-n5 my-auto">Remember me</p>

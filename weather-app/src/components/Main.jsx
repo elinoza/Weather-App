@@ -149,10 +149,10 @@ function Main() {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ favCity: city, geoCoo: geoCoo }),
+          },  body: JSON.stringify({ favCity: city, geoCoo: geoCoo }),
 
           withCredentials: true, // use cookies
+        
         });
         if (response.ok) {
           console.log("fav is posted", city);

@@ -42,9 +42,11 @@ try {
   
     } else {
       console.log(response);
+      setError("user already exists in database")
     }
     
 } catch (error) {
+  setError("user already exists in database")
     console.log(error)
 }
 }
@@ -110,6 +112,8 @@ if( !email|| emailRegex.test(email)=== false){
             onChange={e => setEmail(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
             required
           />
+           <span class="text-danger">{error}</span>
+           
           <br />
           <label>Password</label>
           <input
@@ -122,9 +126,10 @@ if( !email|| emailRegex.test(email)=== false){
             onChange={e => setPassword(e.target.value)}
             required
           />
+        
           <br />
   <input   className="form-input-submit align-self-center" type="submit" value="SIGN UP" />
-         
+
       
         </form>
         <hr />
