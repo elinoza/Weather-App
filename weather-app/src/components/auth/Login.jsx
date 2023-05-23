@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 
 
 
+
 const Login = () => {
   // const { handleChange, values, handleSubmit } = useForm(); // DESTRUCTURING HOOKS TO BE ABLE TO USE THEM IN THIS COMPONENT
 
@@ -18,6 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState("test12345")
   const [error, setError] = useState("")
   const history = useHistory()
+  const[theme,setTheme]=useState("ThunderStorm")
 
   const getTokens = async () => {
     const queryString = window.location.search;
@@ -32,7 +34,11 @@ const Login = () => {
     }
   };
 
-
+  const themeToggler=()=>{
+    const themes=["Clear","ThunderStorm","Drizzle","Rain","Snow","Atmosphere","Clouds"]
+    const count=themes.map((elem,i)=>
+  setTimeout(()=>{{setTheme(elem)};console.log(theme,elem)}, 4000*i))
+  }
 
 
   const login = async (e)=> {
@@ -70,6 +76,7 @@ const Login = () => {
     };
     useEffect(() => {
       getTokens()
+      themeToggler()
  
     }, []);
     
@@ -111,12 +118,14 @@ const Login = () => {
         
       }
     }
+
+   
   return (
 
 
     <Container 
      id="signup-page-wrapper"
-     className="shadow d-flex  ThunderStorm align-items-center main-container justify-content-center"
+     className={`shadow d-flex  ${theme} align-items-center main-container justify-content-center`}
      style={{flexDirection:"column",
      border: "none", padding:"20px"}}
      >
@@ -149,7 +158,7 @@ const Login = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <p class="text-danger">{error}</p>
+          <p className="text-danger">{error}</p>
    
           <button onClick={resetPassword } id="forgotUrPasswordBtn"> Forgot your password? </button> 
           <div className="submit-btn">

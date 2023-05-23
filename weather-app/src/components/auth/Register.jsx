@@ -14,9 +14,15 @@ const Register =()=>{
     const [surname, setSurname] = useState("")
     const [error, setError] = useState("")
     const [emailError, setEmailError] = useState("")
+    const[theme,setTheme]=useState("ThunderStorm")
 
     const history = useHistory()
-    
+
+    const themeToggler=()=>{
+      const themes=["Clear","ThunderStorm","Drizzle","Rain","Snow","Atmosphere","Clouds"]
+themes.map((elem,i)=>
+    setTimeout(()=>{{setTheme(elem)};console.log(theme,elem)}, 4000*i))
+    }
   
 const signUp=async (e)=>{
 e.preventDefault()
@@ -62,13 +68,14 @@ if( !email|| emailRegex.test(email)=== false){
 
 }
 
+useEffect(()=>{themeToggler()},[])
 
     return (
         <>
 
     <Container 
      id="signup-page-wrapper"
-     className="ThunderStorm shadow d-flex  align-items-center main-container justify-content-center "
+     className={`${theme} shadow d-flex  align-items-center main-container justify-content-center`}
      style={{border: "none", padding:"20px"}}
      >
     
@@ -112,7 +119,7 @@ if( !email|| emailRegex.test(email)=== false){
             onChange={e => setEmail(e.target.value)} // THE FUNCTION THAT LISTENS TO THE CHANGE OF THE VALUE
             required
           />
-           <span class="text-danger">{error}</span>
+           <span className="text-danger">{error}</span>
            
           <br />
           <label>Password</label>
