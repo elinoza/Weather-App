@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const themeToggler=()=>{
-    const themes=["Clear","ThunderStorm","Drizzle","Rain","Snow","Atmosphere","Clouds"]
+    const themes=["ThunderStorm","Clear","Drizzle","Rain","Snow","Atmosphere","Clouds"]
     const count=themes.map((elem,i)=>
   setTimeout(()=>{{setTheme(elem)};console.log(theme,elem)}, 7000*i))
   }
