@@ -78,7 +78,7 @@ try {
             required
           />
           <br />
-  <input   className="form-input-submit align-self-center" type="submit" value="SIGN UP" />
+  <input   className="form-input-submit align-self-center" type="submit" value="Reset " />
          
       
         </form>
