@@ -43,7 +43,7 @@ try {
       console.log("password is resetted by successfully", response);
       setInfo("Password is resetted succesfully , please login with your new password.")
 
-      setTimeout(()=>history.push("/"),10000)
+      setTimeout(()=>history.push("/"),5000)
       
       
   
@@ -82,9 +82,10 @@ try {
             onChange={e => setPassword(e.target.value)}
             required
           />
+           <p className="text-success">{info}</p>
           <br />
   <input   className="form-input-submit align-self-center" type="submit" value="Reset " />
-  <p className="text-success">{info}</p>
+ 
          
       
         </form>

@@ -47,7 +47,7 @@ try {
       console.log("user is created", response);
       setInfo("Your account created successfully , please login with your new password.")
 
-      setTimeout(()=>history.push("/"),10000)
+      setTimeout(()=>history.push("/"),5000)
   
       
   
