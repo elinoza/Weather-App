@@ -24,7 +24,7 @@ color:white;
 
   .Clear{
     background-image:url("https://images.unsplash.com/photo-1419833173245-f59e1b93f9ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-
+ 
   }
   .ThunderStorm{
     background-image:url("https://images.unsplash.com/photo-1527572756213-1cda99a355c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80");
@@ -231,6 +231,7 @@ transition: 1s
 .card-city{
   transition:0.5s linear;
   transform-origin: center;
+  background-position: bottom;
 }
 
 .fav-side-bar:hover  .city-card{
