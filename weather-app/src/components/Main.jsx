@@ -356,7 +356,7 @@ function Main() {
         <div className="special-sideBar-wrapper ">
           <div className="d-flex py-3 px-2">
             {" "}
-            <GiHamburgerMenu className="icons" onClick={toggleSideBar} id="hamburger-menu" />
+            <GiHamburgerMenu className="icons" onClick={toggleSideBar} />
             <div className="d-inline degrees ml-auto">
               {" "}
               <h6 onClick={toggleDegrees} className={degrees === "fahrenheit" ? "selected d-inline" : "d-inline"}>

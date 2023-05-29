@@ -88,7 +88,7 @@ function Favs(props) {
             </Card.Text>
           </Card.ImgOverlay>
           <div
-        onClick={() => props.deleteFavCity(city.geoCoo)}
+        onClick={(e) =>{e.stopPropagation() ;props.deleteFavCity(city.geoCoo)} }
         className="sidebar-heart "
       >
         <h6>Delete</h6>
