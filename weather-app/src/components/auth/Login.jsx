@@ -18,6 +18,7 @@ const Login = () => {
   const [email, setEmail] = useState("test@test.com")
   const [password, setPassword] = useState("test12345")
   const [error, setError] = useState("")
+  const [info, setInfo] = useState("")
   const history = useHistory()
   const[theme,setTheme]=useState("ThunderStorm")
 
@@ -84,6 +85,8 @@ const Login = () => {
 
     const resetPassword=async(e)=>{
       e.preventDefault()
+      setError("")
+      setInfo("")
       try {
        
         const url=process.env.REACT_APP_URL
@@ -102,6 +105,7 @@ const Login = () => {
 
           if (res.ok){
             console.log(res)
+            setInfo("Reset email is sent to your adress")
 
           }
           else{
@@ -159,6 +163,7 @@ const Login = () => {
             onChange={e => setPassword(e.target.value)}
           />
           <p className="text-danger">{error}</p>
+          <p className="text-success">{error}</p>
    
           <button onClick={resetPassword } id="forgotUrPasswordBtn"> Forgot your password? </button> 
           <div className="submit-btn">
