@@ -163,7 +163,7 @@ const Login = () => {
             onChange={e => setPassword(e.target.value)}
           />
           <p className="text-danger">{error}</p>
-          <p className="text-success">{error}</p>
+          <p className="text-success">{info}</p>
    
           <button onClick={resetPassword } id="forgotUrPasswordBtn"> Forgot your password? </button> 
           <div className="submit-btn">
