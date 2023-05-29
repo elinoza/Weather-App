@@ -45,6 +45,8 @@ const Login = () => {
   const login = async (e)=> {
     try {
       e.preventDefault()
+      setError("")
+      setInfo("")
       console.log(email,password)
       const url=process.env.REACT_APP_URL
       const res = await axios(`${url}/users/login`, {
