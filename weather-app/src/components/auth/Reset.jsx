@@ -5,11 +5,13 @@ import {useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import { emailRegex } from "../../functions/functions";
 
+
 const Reset =()=>{
 
 
    
     const [password, setPassword] = useState("")
+    const [info, setInfo] = useState("")
   
 
     const history = useHistory()
@@ -39,7 +41,10 @@ try {
     if (response.ok) {
     
       console.log("password is resetted by successfully", response);
-      history.push("/")
+      setInfo("Password is resetted succesfully , please login with your new password.")
+
+      setTimeout(()=>history.push("/"),10000)
+      
       
   
     } else {
@@ -79,6 +84,7 @@ try {
           />
           <br />
   <input   className="form-input-submit align-self-center" type="submit" value="Reset " />
+  <p className="text-success">{info}</p>
          
       
         </form>

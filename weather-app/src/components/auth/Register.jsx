@@ -15,6 +15,8 @@ const Register =()=>{
     const [error, setError] = useState("")
     const [emailError, setEmailError] = useState("")
     const[theme,setTheme]=useState("ThunderStorm")
+    const [info, setInfo] = useState("")
+
 
     const history = useHistory()
 
@@ -43,7 +45,10 @@ try {
     if (response.ok) {
     
       console.log("user is created", response);
-      history.push("/")
+      setInfo("Your account created successfully , please login with your new password.")
+
+      setTimeout(()=>history.push("/"),10000)
+  
       
   
     } else {
@@ -136,6 +141,7 @@ useEffect(()=>{themeToggler()},[])
         
           <br />
   <input   className="form-input-submit align-self-center" type="submit" value="SIGN UP" />
+  <p className="text-success">{info}</p>
 
       
         </form>
