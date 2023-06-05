@@ -19,8 +19,11 @@
 
 🔧 `Axios` for making HTTP requests for login.`
 
+🔧 `SendGrid`  for email delivery when user chooses to reset his/her password.`
+
 # 🚀 Features
 - User authentication and authorization using email and Google sign-in.
+- User can  reset password through email using SendGrid's email delivery platform with accessToken delivered by email .
 - Weather data fetched from OpenWeather API.
 - Automatic location detection on first login.
 - Ability to search for cities and add them to favorites.
@@ -41,3 +44,4 @@ REACT_APP_URL=http://localhost:3005
 
 - Run the app with npm start.
 - Visit http://localhost:3005 in your browser.
+- Dont forget to change scripts start  in package.json file  into "react-scripts start"  when using locally.
