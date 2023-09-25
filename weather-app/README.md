@@ -1,7 +1,7 @@
 # 🌤️ Weather App 🌦️
 🌦️ Weather App is a web application that provides weather information for cities around the world. 
--Users can sign up with their email address or log in with their Google account. Upon their first login, 
--the application shows the weather information for their location. 
+- Users can sign up with their email address or log in with their Google account. Upon their first login, 
+- the application shows the weather information for their location. 
 - Users can search for and add cities to their favorites list. 
 - The list is displayed in the sidebar along with the weather information for each city. 
 - If the screen size is small, users can access the sidebar through the hamburger menu. 
